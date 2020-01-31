@@ -15,22 +15,24 @@ def serialize(root):
     val_list = traverse(root, [])
     return ",".join(val_list)
 
-def traverse(node, acc = []):
-    if node.left is not None:
-        acc = traverse(node.left, acc)
+def traverse(my_node, acc = []):
+    if my_node.left is not None:
+        acc = traverse(my_node.left, acc)
 
-    acc.append(str(node.val))
+    acc.append(str(my_node.val))
 
-    if node.right is not None:
-        acc = traverse(node.right, acc)
+    if my_node.right is not None:
+        acc = traverse(my_node.right, acc)
 
     return acc
 
 
 
 def deserialize(str):
-    node = Node()
-    return ""
+    if not str:
+        return None
+    else:
+        return None
 
 
 

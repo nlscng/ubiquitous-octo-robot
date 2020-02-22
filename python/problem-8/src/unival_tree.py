@@ -63,3 +63,42 @@ assert count_unival_tree(test_tree_single) == 1
 assert count_unival_tree(test_tree_two_level_uni) == 3
 assert count_unival_tree(test_tree_two_level_dual) == 2
 assert count_unival_tree(test_tree_a) == 5
+
+
+def count_unival_tree_2(root):
+    total, _ = helper(root)
+    return total
+
+def helper(root):
+    """
+    Tries to do the is_unival
+    :param root:
+    :return:
+    """
+    if root is None:
+        return 0, True
+
+    left_count, is_left_unival = helper(root.left)
+    right_count, is_right_unival = helper(root.right)
+
+    is_self_unival = True
+    if not is_left_unival:
+        is_self_unival = False
+    if not is_right_unival:
+        is_self_unival = False
+    if root.left is not None and root.left.val != root.val:
+        is_self_unival = False
+    if root.right is not None and root.right.val != root.val:
+        is_self_unival = False
+
+    if is_self_unival:
+        return 1 + left_count + right_count, True
+    else:
+        return left_count + right_count, False
+
+
+# test count unival subtree ver 2 function
+assert count_unival_tree_2(test_tree_single) == 1
+assert count_unival_tree_2(test_tree_two_level_uni) == 3
+assert count_unival_tree_2(test_tree_two_level_dual) == 2
+assert count_unival_tree_2(test_tree_a) == 5

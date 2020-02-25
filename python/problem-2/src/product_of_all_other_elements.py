@@ -39,7 +39,7 @@ assert product_other_no_division([3, 9, 7, 1]) == [63, 21, 27, 27 * 7]
 assert product_other([3, 4, 5, 6]) == [120, 90, 72, 60]
 
 
-# this is from github
+# this is not mine but from github, pretty clever
 # https://github.com/vineetjohn/daily-coding-problem/blob/master/solutions/problem_002.py
 def get_factors(array):
     cumulative_product = 1

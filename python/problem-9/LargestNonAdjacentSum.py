@@ -29,10 +29,27 @@ assert find_max_sum_out_of_two([5, 1, 1, 5]) == 10
 
 
 def find_sum(in_list):
-    return None
+    if len(in_list) < 2:
+        return 0
+
+    cur_sum = 0
+    cur_max_sum = float("-inf")
+    for i in range(len(in_list)):
+        if i == 0:
+            continue
+        elif i == 1:
+            in_list[1] = max(in_list[:2])
+        else:
+            cur_sum = in_list[i] + in_list[i - 2]
+            cur_max_sum = max(cur_max_sum, cur_sum)
+            in_list[i] = cur_max_sum
+
+    return max(in_list)
 
 
-# assert find_sum([]) == 0
-# assert find_sum([1]) == 0
-# assert find_sum([2, 4, 6, 2, 5]) == 13
-# assert find_sum([5, 1, 1, 5]) == 10
+assert find_sum([]) == 0
+assert find_sum([1]) == 0
+assert find_sum([2, 4, 6, 2, 5]) == 13
+assert find_sum([2, 4, 6, 2, 2, 5]) == 13
+assert find_sum([2, 4, 6, 2, 2, 2, 5]) == 15
+assert find_sum([5, 1, 1, 5]) == 10

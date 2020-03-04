@@ -52,29 +52,38 @@ assert ",".join([str(x) for x in bfs(test_a)]) == "0,1,2,3,4,5,6"
 
 
 def left_right_bfs(node: LRBFS):
+    # this is the alternativing bfs, see helper
     out = lrbfs_helper(node)
     return out
 
 
 def lrbfs_helper(node: LRBFS):
+    # this helper uses two stacks, one for levels going right, the other going left; dupe code should be refactored
     if node is None or type(node) is not LRBFS:
         return []
 
     out = []
     reverse = False
-    buff = deque()
-    buff.append((node, 0))
-    while len(buff) > 0:
-        nxt = buff.popleft()
-        if nxt[0] is not None:
-            out.append(nxt[0].val)
-            reverse = nxt[1] % 2 == 0
-            if reverse:
-                buff.append((nxt[0].right, nxt[1] + 1))
-                buff.append((nxt[0].left, nxt[1] + 1))
-            else:
-                buff.append((nxt[0].left, nxt[1] + 1))
-                buff.append((nxt[0].right, nxt[1] + 1))
+    left_stack = []
+    right_stack = []
+    left_stack.append((node, 0))
+    while left_stack or right_stack:
+        if left_stack:
+            while left_stack:
+                nxt = left_stack.pop()
+                if nxt[0] is not None:
+                    out.append(nxt[0].val)
+                    level = nxt[1]
+                    right_stack.append((nxt[0].left, level + 1))
+                    right_stack.append((nxt[0].right, level + 1))
+        elif right_stack:
+            while right_stack:
+                nxt = right_stack.pop()
+                if nxt[0] is not None:
+                    out.append(nxt[0].val)
+                    level = nxt[1]
+                    left_stack.append((nxt[0].right, level + 1))
+                    left_stack.append((nxt[0].left, level + 1))
 
     return out
 

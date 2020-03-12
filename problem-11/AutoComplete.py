@@ -73,12 +73,32 @@ class MyTrie:
         # we've confirmed that the query so far exist in our trie
         # continue from here on and find all the words left in trie
         # TODO dfs from this node and return all complete words in trie
+        return self.__find_all_complete_words(node, prefix=query)
 
+    def __find_all_complete_words(self, node: MyTrieNode, prefix: str):
+        # DFS from the given node, pull out complete words whenever we see one
+        def is_not_none_list(array: list):
+            return list(filter(lambda x: x is not None, array))
 
+        def traverse(n: MyTrieNode, buffer: str):
+            if n.is_end_of_word:
+                found_words.append(buffer)
+            children = is_not_none_list(n.children)
+            for child in children:
+                traverse(child, buffer + child.val)
 
+        found_words = []
+        traverse(node, buffer=prefix)
 
+        return found_words
+
+# set up
 test_trie = MyTrie()
-test_bank = ["dog", "deer", "deal"]
+test_bank = ["do", "dog", "deer", "deal"]
 test_trie.insert_words(test_bank)
-test_str = "de"
-assert test_trie.suggest(test_str) == ["deer", "deal"]
+
+assert test_trie.suggest("ab") == []
+assert test_trie.suggest("dc") == []
+assert test_trie.suggest("do") == ["do", "dog"]
+assert test_trie.suggest("de") == ["deal", "deer"]
+assert test_trie.suggest("d") == ["deal", "deer", "do", "dog"]

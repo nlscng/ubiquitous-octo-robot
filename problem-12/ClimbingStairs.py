@@ -9,6 +9,7 @@
 # you could climb any number from a set of positive integers X? For example, if X = {1, 3, 5}, you could climb 1, 3,
 # or 5 steps at a time.
 
+
 def climb_stairs_with_one_and_two(total: int):
     if total == 0:
         return 0
@@ -50,5 +51,5 @@ def climb_stairs(total: int, step_sizes: []):
 
 assert climb_stairs(4, [1, 2]) == 5
 assert climb_stairs(4, [1, 3, 5]) == 3
-assert climb_stairs(4, [1,3]) == 3
+assert climb_stairs(4, [1, 3]) == 3
 assert climb_stairs(5, [1, 3, 5]) == 4

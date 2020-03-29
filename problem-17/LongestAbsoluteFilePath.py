@@ -38,6 +38,22 @@
 #
 # The name of a directory or sub-directory will not contain a period.
 
+class LongestABSPathNode:
+    def __init__(self, file_name, is_file=False, children=[]):
+        assert len(file_name) > 0
+        self.file_name = file_name
+        self.name_length = len(file_name)
+        self.is_file = is_file
+        self.children = children
+
+    def add_children(self, new_children):
+        self.children = self.children + new_children
+
+    def add_child(self, new_child):
+        self.children.append(new_child)
+
+
+
 
 def longest_abs_path(fs: str):
     """
@@ -46,5 +62,31 @@ def longest_abs_path(fs: str):
     :return:
     """
 
-    # parse the fs str one time and build a graph/tree, where nodes contain the text length of that file/dir
-    # from the tree root, dfs and find a path where the nodes contained the most text length, and path ends on a file
+    # TODO: parse the fs str one time and build a graph/tree, where nodes contain the text length of that file/dir
+    #  from the tree root, dfs and find a path where the nodes contained the most text length, and path ends on a file
+
+    # this is not my own solution, I struggled to build the file tree from the given string
+    # see https://www.youtube.com/watch?v=Ad9Qqhy43fE
+
+    lines = fs.split('\n')
+
+    max_len = 0
+    depth_map = {0: 0}
+    for line in lines:
+        path = line.split('\t')[-1]
+        depth = len(line) - len(path)
+
+        if "." in path:
+            max_len = max(max_len, depth_map[depth] + len(path))
+        else:
+            depth_map[depth + 1] = depth_map[depth] + len(path) + 1
+
+    return max_len
+
+
+assert longest_abs_path("dir\n\tsubdir1\n\tsubdir2") == 0
+assert longest_abs_path("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext") == 20
+assert longest_abs_path("dir\n\tsubdir1\n\t\tfile.txt\n\tsubdir2\n\t\tfile.ext") == 20
+assert longest_abs_path(
+    "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\t" +
+    "subsubdir2\n\t\t\tfile2.ext") == 32

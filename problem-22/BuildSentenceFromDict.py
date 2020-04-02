@@ -23,12 +23,15 @@ def build_sentence(s: str, word_bank: set):
             word = s[idx:walker+1]  # important! I want the word on both boundaries, and this is always within len(s)
             if word in word_bank:
                 sentence.append(word)
+                idx = walker
+                # found a word, move starting idx to end of current word, then break out to outer most loop
                 break
             walker += 1
         idx += 1
     return sentence
 
 
+assert build_sentence("", set([])) is None
 assert build_sentence("ok", {'ok'}) == ['ok'], "actual output: {}".format(build_sentence("ok", {'ok'}))
 assert build_sentence("thequickbrownfox", {'the', 'quick', 'brown', 'fox'}) == ['the', 'quick', 'brown', 'fox'], \
     'actual output: {}'.format(build_sentence("thequickbrownfox", {'the', 'quick', 'brown', 'fox'}))

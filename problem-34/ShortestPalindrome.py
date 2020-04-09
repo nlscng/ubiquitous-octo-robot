@@ -68,7 +68,7 @@ def shortest_palindrome(word: str):
                 memo[i][j] = from_left.union(from_down)
 
     found = list(memo[0][n - 1])
-    found.sort()
+    found.sort(key=lambda one_word: (len(one_word), one_word))
 
     return found[0]
 
@@ -78,6 +78,7 @@ assert shortest_palindrome("a") == "a"
 assert shortest_palindrome("aa") == "aa"
 assert shortest_palindrome("ab") == "aba"
 assert shortest_palindrome("abb") == "abba"
+assert shortest_palindrome("aab") == "baab"
 assert shortest_palindrome("racecar") == "racecar"
 assert shortest_palindrome("google") == "elgoogle"
 assert shortest_palindrome("elgoog") == "elgoogle"

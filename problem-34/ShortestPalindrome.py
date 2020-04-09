@@ -34,12 +34,19 @@ def build_next_words(word_set: set, new_char, valid_word: str):
     found = set()
     for word in list(word_set):
         new_word = new_char + word + new_char
-        if is_palindrome(new_word) and valid_word in new_word:
+        if valid_word in new_word:
             found.add(new_word)
     return found
 
 
 def shortest_palindrome(word: str):
+    # let P(i, j) be the set of shortest possible palidrome that is using at least w_i, ... w_j, where i and j are
+    # indices to the given word.
+    # then P(i, j) is:
+    # if word[i:j+1] is itself a palindrome, word[i:j+1],
+    # or, union of (palindrome build from P(i, j-1) + word[j]) and (palindrome build from P(i+1, j) + word[i])
+
+    # essentially we are two walkers walking inwards from the edges of the given word
     if not word or not isinstance(word, str):
         return ""
 
@@ -66,9 +73,9 @@ def shortest_palindrome(word: str):
     return found[0]
 
 
-# assert shortest_palindrome("") == ""
-# assert shortest_palindrome("a") == "a"
-# assert shortest_palindrome("aa") == "aa"
+assert shortest_palindrome("") == ""
+assert shortest_palindrome("a") == "a"
+assert shortest_palindrome("aa") == "aa"
 assert shortest_palindrome("ab") == "aba"
 assert shortest_palindrome("abb") == "abba"
 assert shortest_palindrome("racecar") == "racecar"

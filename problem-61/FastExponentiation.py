@@ -69,5 +69,7 @@ b_start = time.time()
 assert brute_force_power(BASE, POWER) == pow(BASE, POWER)
 b_end = time.time()
 b_dur = b_end - b_start
-
+print("Base {} to the power of {}".format(BASE, POWER))
+print("fast exponentiation: {}".format(f_dur))
+print("brute force power: {}".format(b_dur))
 assert b_dur > f_dur

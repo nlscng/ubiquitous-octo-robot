@@ -10,8 +10,7 @@ def dfs_iter(v_values: list, graph: list, k: chr, src: int = None) -> bool:
     """
     start = src if src is not None else 0
     visited = [False] * len(v_values)
-    stack = []
-    stack.append(start)
+    stack = [start]
 
     while len(stack) > 0:
         walker = stack.pop()

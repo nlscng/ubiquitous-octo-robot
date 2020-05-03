@@ -4,12 +4,12 @@ def detect_cycle(vertices: list, edges: list) -> bool:
 
     walker = vertices[0]
     post_orders = {x: 0 for x in vertices}
-    proc_stack: list = [walker]
+    explore_stack: list = [walker]
     path_stack = []
     visited = set()
     clock = 0
-    while len(proc_stack) > 0:
-        walker = proc_stack.pop()
+    while len(explore_stack) > 0:
+        walker = explore_stack.pop()
         if walker not in visited:
             path_stack.append(walker)  # add to the current active path stack
             visited.add(walker)
@@ -21,7 +21,13 @@ def detect_cycle(vertices: list, edges: list) -> bool:
                 clock += 1
             else:
                 for one_neighbor in neighbors:
-                    proc_stack.append(one_neighbor)
+                    explore_stack.append(one_neighbor)
+
+    # clean up path stack, if there are vertices left when we are done exploring
+    while len(path_stack) > 0:
+        walker = path_stack.pop()
+        post_orders[walker] = clock
+        clock += 1
 
     print(post_orders)
 

@@ -29,10 +29,19 @@ def detect_cycle(vertices: list, edges: list) -> bool:
         post_orders[walker] = clock
         clock += 1
 
-    print(post_orders)
+    if LOG_POST_ORDER:
+        print(post_orders)
 
+    # scan through the edges, if there's a back edge, there's a cycle
+    for one_edge in edges:
+        src, tgt = one_edge
+        if post_orders[tgt] >= post_orders[src]:
+            # ref: the equal sign is needed to detect self loop where post order number is the same
+            return True
     return False
 
+
+LOG_POST_ORDER = True
 
 t_vertices = [0, 1, 2, 3]
 t_edges = [(0, 1),
@@ -41,4 +50,14 @@ t_edges = [(0, 1),
            (2, 1),
            (2, 3)]
 
-assert detect_cycle(t_vertices, t_edges)
+assert not detect_cycle(t_vertices, t_edges)
+
+verts_2 = [0, 1, 2]
+edges_2 = [(0, 1),
+           (1, 2),
+           (2, 0)]
+assert detect_cycle(verts_2, edges_2)
+
+verts_3 = [0]
+edges_3 = [(0, 0)]
+assert detect_cycle(verts_3, edges_3)

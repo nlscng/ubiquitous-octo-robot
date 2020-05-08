@@ -4,7 +4,7 @@
 # probability.
 
 import random as rand
-
+# SEE: reservoir sampling
 
 def reservoir_sample(stream: list, k: int):
     found = [None] * k

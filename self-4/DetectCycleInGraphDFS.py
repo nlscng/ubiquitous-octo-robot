@@ -36,7 +36,7 @@ def detect_cycle(vertices: list, edges: list) -> bool:
     for one_edge in edges:
         src, tgt = one_edge
         if post_orders[tgt] >= post_orders[src]:
-            # ref: the equal sign is needed to detect self loop where post order number is the same
+            # REF: the equal sign is needed to detect self loop where post order number is the same
             return True
     return False
 

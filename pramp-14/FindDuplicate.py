@@ -54,6 +54,7 @@ assert binary_search(5, [1, 2, 5, 6, 8, 9])
 def find_duplicate_one_huge_list(arr1, arr2):
     # assume arr2 is very very very large
     # then we use binary search to break down m into log m
+    # so complexity wise this is time O(n * log m) and space O(1)
     n = len(arr1)
     m = len(arr2)
 

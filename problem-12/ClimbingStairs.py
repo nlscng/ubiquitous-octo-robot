@@ -36,17 +36,17 @@ def climb_stairs(total: int, step_sizes: []):
     if not step_sizes or not total:
         return 0
 
-    ways = [0] * (total + 1)
+    memo = [0] * (total + 1)
     for s in step_sizes:
         if s < total:
-            ways[s] = 1
+            memo[s] = 1
 
     for i in range(total + 1):
         for s in step_sizes:
             if i - s > 0:
-                ways[i] += ways[i - s]
+                memo[i] += memo[i - s]
 
-    return ways[-1]
+    return memo[-1]
 
 
 assert climb_stairs(4, [1, 2]) == 5

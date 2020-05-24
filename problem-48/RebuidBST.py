@@ -19,7 +19,7 @@
 #  / \ / \
 # d  e f  g
 
-from common.treenode.MyBstNode import MyBstNode
+from common.treenode.MyBstNodeStringVal import MyBstNodeStringVal
 
 
 def build_tree(preorder: list, inorder: list):
@@ -53,14 +53,14 @@ def build_tree(preorder: list, inorder: list):
         if not pre:
             return None
         if len(pre) == 1:
-            return MyBstNode(idx_to_val[pre[0]])
+            return MyBstNodeStringVal(idx_to_val[pre[0]])
 
         head = pre[0]
         rest = pre[1:]
         left, right = split(head, rest)
         left_child = build(left)
         right_child = build(right)
-        root = MyBstNode(idx_to_val[head])
+        root = MyBstNodeStringVal(idx_to_val[head])
         root.left = left_child
         root.right = right_child
         return root
@@ -70,13 +70,13 @@ def build_tree(preorder: list, inorder: list):
     return tree
 
 
-a = MyBstNode('a')
-b = MyBstNode('b')
-c = MyBstNode('c')
-d = MyBstNode('d')
-e = MyBstNode('e')
-f = MyBstNode('f')
-g = MyBstNode('g')
+a = MyBstNodeStringVal('a')
+b = MyBstNodeStringVal('b')
+c = MyBstNodeStringVal('c')
+d = MyBstNodeStringVal('d')
+e = MyBstNodeStringVal('e')
+f = MyBstNodeStringVal('f')
+g = MyBstNodeStringVal('g')
 
 assert build_tree([], []) is None
 assert build_tree(['a'], ['a']) == a

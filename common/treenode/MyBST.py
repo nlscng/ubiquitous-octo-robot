@@ -1,22 +1,33 @@
-class MyBstNodeStringVal:
-    def __init__(self, val: str, left=None, right=None, parent=None):
-        self.val = val
+class MyBinaryTreeStem:
+    def __init__(self, left=None, right=None, parent=None):
         self.left = left
         self.right = right
         self.parent = parent
 
     def __str__(self):
+        raise Exception('not implemented')
+
+    def __eq__(self, other):
+        return self.left == other.left and self.right == other.right
+
+
+class MyBstNodeStringVal(MyBinaryTreeStem):
+    def __init__(self, val: str, left=None, right=None, parent=None):
+        super().__init__(left, right, parent)
+        self.val = val
+
+    def __str__(self):
         res = self.val
         if self.left is not None:
-            res = res + ", " + str(self.left)
+            res = str(res) + ", " + str(self.left)
         if self.right is not None:
-            res = res + ", " + str(self.right)
+            res = str(res) + ", " + str(self.right)
         return res
 
     def __eq__(self, other):
         if other is None or not isinstance(other, MyBstNodeStringVal):
             return False
-        return self.val == other.val and self.left == other.left and self.right == other.right
+        return self.val == other.val and super().__eq__(other)
 
     def reset(self):
         self.left = self.right = self.parent = None
@@ -35,12 +46,10 @@ b.left = d
 assert str(a) == 'a, b, d, c'
 
 
-class MyBstNodeIntVal:
+class MyBstNodeIntVal(MyBinaryTreeStem):
     def __init__(self, val: int, left=None, right=None, parent=None):
+        super().__init__(left, right, parent)
         self.val = val
-        self.left = left
-        self.right = right
-        self.parent = parent
 
     def __str__(self):
         res = self.val
@@ -53,7 +62,7 @@ class MyBstNodeIntVal:
     def __eq__(self, other):
         if other is None or not isinstance(other, MyBstNodeStringVal):
             return False
-        return self.val == other.val and self.left == other.left and self.right == other.right
+        return self.val == other.val and super().__eq__(other)
 
     def reset(self):
         self.left = self.right = self.parent = None

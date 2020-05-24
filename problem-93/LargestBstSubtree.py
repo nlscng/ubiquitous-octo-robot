@@ -5,7 +5,7 @@
 # Given a tree, find the largest tree/subtree that is a BST.
 #
 # Given a tree, return the size of the largest tree/subtree that is a BST.
-from common.treenode.MyBstNodeStringVal import MyBstNodeIntVal
+from common.treenode.MyBST import MyBstNodeIntVal
 import sys
 
 

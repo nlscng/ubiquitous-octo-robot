@@ -19,7 +19,7 @@
 #  / \ / \
 # d  e f  g
 
-from common.treenode.MyBstNodeStringVal import MyBstNodeStringVal
+from common.treenode.MyBST import MyBstNodeStringVal
 
 
 def build_tree(preorder: list, inorder: list):

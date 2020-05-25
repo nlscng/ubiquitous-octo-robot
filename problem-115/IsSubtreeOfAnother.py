@@ -58,3 +58,4 @@ b.right = c
 d.right = e
 g.right = h
 assert is_subtree(d, g)
+assert is_subtree(b, g)

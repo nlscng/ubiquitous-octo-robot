@@ -1,4 +1,4 @@
-class MyBinaryTreeStem:
+class _MyBinaryTreeStem:
     def __init__(self, left=None, right=None, parent=None):
         self.left = left
         self.right = right
@@ -10,13 +10,20 @@ class MyBinaryTreeStem:
     def __eq__(self, other):
         return self.left == other.left and self.right == other.right
 
+    def deepcopy(self):
+        raise Exception('not implemented')
 
-class MyBstNodeStringVal(MyBinaryTreeStem):
+
+class MyBstNodeStringVal(_MyBinaryTreeStem):
     def __init__(self, val: str, left=None, right=None, parent=None):
         super().__init__(left, right, parent)
         self.val = val
 
     def __str__(self):
+        """
+        This is a pre-order to string method.
+        :return:
+        """
         res = self.val
         if self.left is not None:
             res = str(res) + ", " + str(self.left)
@@ -32,6 +39,17 @@ class MyBstNodeStringVal(MyBinaryTreeStem):
     def reset(self):
         self.left = self.right = self.parent = None
 
+    def deepcopy(self):
+        new_node = MyBstNodeStringVal(self.val)
+
+        if self.left is not None:
+            new_left = self.left.deepcopy()
+            new_node.left = new_left
+        if self.right is not None:
+            new_right = self.right.deepcopy()
+            new_node.right = new_right
+        return new_node
+
 
 a = MyBstNodeStringVal('a')
 b = MyBstNodeStringVal('b')
@@ -45,8 +63,11 @@ b.left = d
 # d.parent = b
 assert str(a) == 'a, b, d, c'
 
+a_copy = a.deepcopy()
+assert a == a_copy
 
-class MyBstNodeIntVal(MyBinaryTreeStem):
+
+class MyBstNodeIntVal(_MyBinaryTreeStem):
     def __init__(self, val: int, left=None, right=None, parent=None):
         super().__init__(left, right, parent)
         self.val = val

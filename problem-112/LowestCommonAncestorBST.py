@@ -11,7 +11,7 @@
 from common.treenode.MyBST import MyBstNodeIntVal
 
 def lowest_common_ancestor(root: MyBstNodeIntVal, node_a: MyBstNodeIntVal, node_b: MyBstNodeIntVal) -> MyBstNodeIntVal:
-
+    # this is O(h) in time, and O(1) in space; h is height of the tree
     def get_parents(node: MyBstNodeIntVal) -> list:
         parents = [node]
         walker = node

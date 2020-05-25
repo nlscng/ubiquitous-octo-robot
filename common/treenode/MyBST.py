@@ -3,6 +3,7 @@ class _MyBinaryTreeStem:
         self.left = left
         self.right = right
         self.parent = parent
+        self.val = None
 
     def __str__(self):
         raise Exception('not implemented')
@@ -81,7 +82,7 @@ class MyBstNodeIntVal(_MyBinaryTreeStem):
         return str(res)
 
     def __eq__(self, other):
-        if other is None or not isinstance(other, MyBstNodeStringVal):
+        if other is None or not isinstance(other, MyBstNodeIntVal):
             return False
         return self.val == other.val and super().__eq__(other)
 

@@ -10,9 +10,9 @@
 #
 # output: "zyx"
 
-def get_shortest_unique_substring(arr: list, s: str) -> str:
+def get_shortest_unique_substring(arr: list, str: str) -> str:
     # safety check and stuff
-    if not arr or not s:
+    if not arr or not str:
         return ""
 
     is_present = {a: False for a in arr}
@@ -21,27 +21,28 @@ def get_shortest_unique_substring(arr: list, s: str) -> str:
     def is_valid() -> bool:
         return all(is_present.values())
 
-    shortest = s
+    shortest = None
     l_walker, r_walker = 0, 0
-    count[s[r_walker]] += 1
-    is_present[s[r_walker]] = True
-    while l_walker < len(s) and len(s) > r_walker >= l_walker:
+    # count[s[r_walker]] += 1
+    # is_present[s[r_walker]] = True
+    while l_walker < len(str) and l_walker <= r_walker <= len(str):
         if is_valid():
-            found = s[l_walker: r_walker + 1]
-            if len(shortest) > len(found):
+            found = str[l_walker: r_walker]
+            if shortest is None or len(shortest) > len(found):
                 shortest = found
-            count[s[l_walker]] -= 1
-            if count[s[l_walker]] == 0:
-                is_present[s[l_walker]] = False
-            l_walker += 1   # remember to move l_walker after processing the chr at l_walker, not before
+            if str[l_walker] in count:
+                count[str[l_walker]] -= 1
+                if count[str[l_walker]] == 0:
+                    is_present[str[l_walker]] = False
+            l_walker += 1  # remember to move l_walker after processing the chr at l_walker, not before
         else:
+            if r_walker < len(str) and str[r_walker] in count:  # need to check for boundary coz we are moving right
+                count[str[r_walker]] += 1
+                if count[str[r_walker]] == 1:
+                    is_present[str[r_walker]] = True
             r_walker += 1
-            if r_walker < len(s):   # need to check for boundary coz we are moving right
-                count[s[r_walker]] += 1
-                if count[s[r_walker]] == 1:
-                    is_present[s[r_walker]] = True
 
-    return shortest
+    return shortest if shortest is not None else ""
 
 
 assert get_shortest_unique_substring([], "abc") == ""
@@ -49,3 +50,7 @@ assert get_shortest_unique_substring(['x'], "") == ""
 assert get_shortest_unique_substring(['a'], "a") == "a"
 assert get_shortest_unique_substring(['x', 'y', 'z'], "xyyzyzyx") == "zyx", "Acutal: {}".format(
     get_shortest_unique_substring(['x', 'y', 'z'], "xyyzyzyx"))
+assert get_shortest_unique_substring(['a'], 'b') == ""
+assert get_shortest_unique_substring(['a'], 'a') == 'a'
+assert get_shortest_unique_substring(['A', 'B', 'C'], 'ADOBECODEBANCDDD') == 'BANC'
+assert get_shortest_unique_substring(["A", "B", "C", "E", "K", "I"], 'KADOBECODEBANCDDDEI') == 'KADOBECODEBANCDDDEI'

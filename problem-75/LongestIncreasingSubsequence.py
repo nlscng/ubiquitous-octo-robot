@@ -28,11 +28,11 @@ def LIS(arr: list) -> list:
 
     # now backtrack to find the actual LIS
     cur_max_len = max(memo)
-    res = [cur_max_len]
+    res = []
     for idx, val in enumerate(memo[::-1]):
-        # print("idx: {}, val: {}".format(idx, val))
-        if val == cur_max_len - 1:
-            res.append(arr[len(arr) - idx])
+        print("idx: {}, val: {}".format(idx, val))
+        if val == cur_max_len:
+            res.append(arr[-idx-1])
             cur_max_len -= 1
 
     return res[::-1]

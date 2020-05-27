@@ -19,21 +19,25 @@ def LIS(arr: list) -> list:
     # let L(i) be the length of longest increasing subseq from beginning of arry up to and actually include i-th
     # index in LIS then L(i) = max length of {L(0) ... L(j)} + 1, where 0 <= j < i, and array[j] < array[i]
     memo = [1] * len(arr)
+    parents = [-1] * len(arr)
 
     # init
     for i in range(1, len(arr)):
-        existing_lis = [value for idx, value in enumerate(memo[:i]) if arr[idx] < arr[i]]
-        if existing_lis:
-            memo[i] = max(existing_lis) + 1
+        max_idx, max_len = 0, 0
+        for j in range(i):
+            if arr[j] < arr[i] and memo[j] >= max_len:
+                max_idx = j
+                max_len = memo[j]
+        memo[i] = max_len + 1
+        parents[i] = max_idx
 
     # now backtrack to find the actual LIS
-    cur_max_len = max(memo)
+    max_len = max(memo)
     res = []
-    for idx, val in enumerate(memo[::-1]):
-        print("idx: {}, val: {}".format(idx, val))
-        if val == cur_max_len:
-            res.append(arr[-idx-1])
-            cur_max_len -= 1
+    ptr = memo.index(max_len)
+    while ptr != -1:
+        res.append(arr[ptr])
+        ptr = parents[ptr]
 
     return res[::-1]
 

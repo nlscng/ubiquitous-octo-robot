@@ -31,34 +31,76 @@
 # SEE: https://www.youtube.com/watch?v=l3hda49XcDE&feature=emb_logo
 # GG: a tricky but worthy dynamic programming problem
 def is_match(text, pattern):
-    memo = [[False] * (len(pattern) + 1) for _ in range(len(text) + 1)]
-    memo[0][0] = True  # empty text and empty pattern is a match
+    if text == pattern == '':
+        return True
+    elif text == '':
+        return False
+    elif pattern == '':
+        return False
+
+    text = ' ' + text
+    pattern = ' ' + pattern
     lt = len(text)
     lp = len(pattern)
+    memo = [[False] * lp for _ in range(lt)]
+    memo[0][0] = True  # empty text and empty pattern is a match
 
-    for i in range(1, lt + 1):
+    # special case, handle the first row, where we have empty txt, but non-empty pattern; this row isn't always false
+    for i in range(1, lp):
+        memo[0][i] = True if pattern[i] == '.' or pattern[i] == '*' else False
+
+    for i in range(1, lt):
         # watch for the added col/row of 0th, we deal with i, j in memo, but i-1, j-1 in text and pattern
-        for j in range(1, lp + 1):
-            if text[i - 1] == pattern[j - 1] or pattern[j - 1] == '.':
-                # if i text match char pattern at j, or j is wildcard
+        for j in range(1, lp):
+            if text[i] == pattern[j] or pattern[j] == '.':
+                # if i text match char pattern at j, or j is wildcard, the this result is based on last char txt and
+                # last char pattern match
                 memo[i][j] = memo[i - 1][j - 1]
-            elif pattern[j - 1] == '*':
-                zero_occurrence_result = memo[i][j - 2]
-                # the case where pattern is a*, and we consider * to match 0 occurrence, this is always be possible
-                memo[i][j] = memo[i - 1][j] or zero_occurrence_result if text[i - 1] == pattern[j - 2] or pattern[
-                    j - 2] == '.' else zero_occurrence_result
-                # if the pattern before the * is a char that and we match, or that char is the wildcard, we take the
-                # pattern match result of the same pattern (j), but drop our current txt at (i)
+            elif pattern[j] == '*':
+                if text[i] == pattern[j-1] or pattern[j-1] == '.':
+                    # if pattern char is star, and we can fold this txt chr to prev one, aka last txt char
+                    # is the same, or is a wild card, then this result is result of last txt char matching with
+                    # current pattern chr
+                    memo[i][j] = memo[i-1][j]
+                else:
+                    # else, we can't fold this txt chr into the *, so we look for the zero count match for *
+                    # which is, zero count for the pattern char right before this j,
+                    # so the result is if text up to i is a regex match up to pattern - 2
+                    zero_occurrence_result = memo[i][j - 2] if j > 1 else False
+                    memo[i][j] = zero_occurrence_result
             else:
                 memo[i][j] = False
 
-    return memo[lt][lp]
+    return memo[lt - 1][lp - 1]
 
 
 assert is_match("", "")
 assert is_match("a", "a")
 assert is_match("abc", "abc")
+
+assert not is_match('a', '')
+assert not is_match('', 'a')
+assert not is_match('a', 'b')
+assert not is_match('abc', 'cab')
+
 assert is_match("abc", "a.c")
+assert is_match("abc", "a..")
+assert is_match("abc", "a..*")
+
+assert not is_match('a', 'a.')
+assert not is_match('ab', 'ab.')
+assert not is_match('ac', 'a.c')
+assert not is_match('acb', 'a.c')
+
+assert is_match("a", "a*")
+assert is_match("aa", "a*")
+assert is_match("aaa", "a*")
+
+assert not is_match("ab", "a*")
+assert not is_match("aab", "a*")
+
 assert is_match("abb", "a.*")
 assert is_match("abbcd", 'a.*d')
 assert is_match("abbcd", 'ab*.d')
+assert is_match("aa", 'a*.')
+assert is_match('xaabyc', 'xa*b.c')

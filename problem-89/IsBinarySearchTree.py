@@ -8,12 +8,12 @@
 # left child must be less than or equal to the root and the key in the right child must be greater than or equal to
 # the root.
 
-from common.treenode.MyBST import MyBstNodeIntVal
+from common.treenode.MyBST import BstIntNode
 import sys
 
 
-def is_bst(root: MyBstNodeIntVal) -> bool:
-    def is_bst_recur(node: MyBstNodeIntVal, my_min: int, my_max: int) -> bool:
+def is_bst(root: BstIntNode) -> bool:
+    def is_bst_recur(node: BstIntNode, my_min: int, my_max: int) -> bool:
         if node is None:
             return True
         is_valid = my_min < node.val < my_max
@@ -27,15 +27,15 @@ def is_bst(root: MyBstNodeIntVal) -> bool:
 #  1      5   8
 #        4   7 9
 
-a = MyBstNodeIntVal(3)
-b = MyBstNodeIntVal(2)
-c = MyBstNodeIntVal(1)
-d = MyBstNodeIntVal(6)
-e = MyBstNodeIntVal(5)
-f = MyBstNodeIntVal(8)
-g = MyBstNodeIntVal(4)
-h = MyBstNodeIntVal(7)
-i = MyBstNodeIntVal(9)
+a = BstIntNode(3)
+b = BstIntNode(2)
+c = BstIntNode(1)
+d = BstIntNode(6)
+e = BstIntNode(5)
+f = BstIntNode(8)
+g = BstIntNode(4)
+h = BstIntNode(7)
+i = BstIntNode(9)
 
 assert is_bst(a)
 

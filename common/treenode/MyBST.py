@@ -15,7 +15,7 @@ class _MyBinaryTreeStem:
         raise Exception('not implemented')
 
 
-class MyBstNodeStringVal(_MyBinaryTreeStem):
+class BstStrNode(_MyBinaryTreeStem):
     def __init__(self, val: str, left=None, right=None, parent=None):
         super().__init__(left, right, parent)
         self.val = val
@@ -33,7 +33,7 @@ class MyBstNodeStringVal(_MyBinaryTreeStem):
         return res
 
     def __eq__(self, other):
-        if other is None or not isinstance(other, MyBstNodeStringVal):
+        if other is None or not isinstance(other, BstStrNode):
             return False
         return self.val == other.val and super().__eq__(other)
 
@@ -41,7 +41,7 @@ class MyBstNodeStringVal(_MyBinaryTreeStem):
         self.left = self.right = self.parent = None
 
     def deepcopy(self):
-        new_node = MyBstNodeStringVal(self.val)
+        new_node = BstStrNode(self.val)
 
         if self.left is not None:
             new_left = self.left.deepcopy()
@@ -52,10 +52,10 @@ class MyBstNodeStringVal(_MyBinaryTreeStem):
         return new_node
 
 
-a = MyBstNodeStringVal('a')
-b = MyBstNodeStringVal('b')
-c = MyBstNodeStringVal('c')
-d = MyBstNodeStringVal('d')
+a = BstStrNode('a')
+b = BstStrNode('b')
+c = BstStrNode('c')
+d = BstStrNode('d')
 a.left = b
 a.right = c
 # b.parent = a
@@ -68,7 +68,7 @@ a_copy = a.deepcopy()
 assert a == a_copy
 
 
-class MyBstNodeIntVal(_MyBinaryTreeStem):
+class BstIntNode(_MyBinaryTreeStem):
     def __init__(self, val: int, left=None, right=None, parent=None):
         super().__init__(left, right, parent)
         self.val = val
@@ -82,7 +82,7 @@ class MyBstNodeIntVal(_MyBinaryTreeStem):
         return str(res)
 
     def __eq__(self, other):
-        if other is None or not isinstance(other, MyBstNodeIntVal):
+        if other is None or not isinstance(other, BstIntNode):
             return False
         return self.val == other.val and super().__eq__(other)
 
@@ -90,10 +90,10 @@ class MyBstNodeIntVal(_MyBinaryTreeStem):
         self.left = self.right = self.parent = None
 
 
-a = MyBstNodeIntVal(1)
-b = MyBstNodeIntVal(2)
-c = MyBstNodeIntVal(3)
-d = MyBstNodeIntVal(4)
+a = BstIntNode(1)
+b = BstIntNode(2)
+c = BstIntNode(3)
+d = BstIntNode(4)
 a.left = b
 a.right = c
 # b.parent = a

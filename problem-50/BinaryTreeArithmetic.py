@@ -16,7 +16,7 @@
 # 3  2  4  5
 # You should return 45, as it is (3 + 2) * (4 + 5).
 
-from common.treenode.MyBST import MyBstNodeStringVal
+from common.treenode.MyBST import BstStrNode
 
 '''
     *
@@ -27,12 +27,12 @@ from common.treenode.MyBST import MyBstNodeStringVal
 
 '''
 
-def bst_arithmetic(root: MyBstNodeStringVal) -> int:
-    if not root or not isinstance(root, MyBstNodeStringVal):
+def bst_arithmetic(root: BstStrNode) -> int:
+    if not root or not isinstance(root, BstStrNode):
         return 0
 
     # this looks like a post order processing
-    def post_traverse(node: MyBstNodeStringVal) -> int:
+    def post_traverse(node: BstStrNode) -> int:
         if node.left is None or node.right is None:
             return int(node.val)
 
@@ -49,23 +49,23 @@ def bst_arithmetic(root: MyBstNodeStringVal) -> int:
     return post_traverse(root)
 
 
-test_a = MyBstNodeStringVal('3')
+test_a = BstStrNode('3')
 assert bst_arithmetic(test_a) == 3
 
-test_b = MyBstNodeStringVal('+')
-b_1 = MyBstNodeStringVal('2')
-b_2 = MyBstNodeStringVal('3')
+test_b = BstStrNode('+')
+b_1 = BstStrNode('2')
+b_2 = BstStrNode('3')
 test_b.left = b_1
 test_b.right = b_2
 assert bst_arithmetic(test_b) == 5
 
-test_c = MyBstNodeStringVal('*')
-c_left = MyBstNodeStringVal('+')
-c_right = MyBstNodeStringVal('+')
-c_left_left = MyBstNodeStringVal('3')
-c_left_right = MyBstNodeStringVal('2')
-c_right_left = MyBstNodeStringVal('4')
-c_right_right = MyBstNodeStringVal('5')
+test_c = BstStrNode('*')
+c_left = BstStrNode('+')
+c_right = BstStrNode('+')
+c_left_left = BstStrNode('3')
+c_left_right = BstStrNode('2')
+c_right_left = BstStrNode('4')
+c_right_right = BstStrNode('5')
 test_c.left = c_left
 test_c.right = c_right
 c_left.left = c_left_left

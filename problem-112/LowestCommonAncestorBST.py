@@ -8,11 +8,11 @@
 # According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes v and w
 # as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).”
 
-from common.treenode.MyBST import MyBstNodeIntVal
+from common.treenode.MyBST import BstIntNode
 
-def lowest_common_ancestor(root: MyBstNodeIntVal, node_a: MyBstNodeIntVal, node_b: MyBstNodeIntVal) -> MyBstNodeIntVal:
+def lowest_common_ancestor(root: BstIntNode, node_a: BstIntNode, node_b: BstIntNode) -> BstIntNode:
     # this is O(h) in time, and O(1) in space; h is height of the tree
-    def get_parents(node: MyBstNodeIntVal) -> list:
+    def get_parents(node: BstIntNode) -> list:
         parents = [node]
         walker = node
         while walker.parent is not None:
@@ -40,15 +40,15 @@ def lowest_common_ancestor(root: MyBstNodeIntVal, node_a: MyBstNodeIntVal, node_
     return None
 
 
-a = MyBstNodeIntVal(1)
-b = MyBstNodeIntVal(2)
-c = MyBstNodeIntVal(3)
-d = MyBstNodeIntVal(4)
-e = MyBstNodeIntVal(5)
-f = MyBstNodeIntVal(6)
-g = MyBstNodeIntVal(7)
-h = MyBstNodeIntVal(8)
-i = MyBstNodeIntVal(9)
+a = BstIntNode(1)
+b = BstIntNode(2)
+c = BstIntNode(3)
+d = BstIntNode(4)
+e = BstIntNode(5)
+f = BstIntNode(6)
+g = BstIntNode(7)
+h = BstIntNode(8)
+i = BstIntNode(9)
 
 a.left = b
 b.parent = a

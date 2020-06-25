@@ -10,10 +10,10 @@
 #  /
 # d
 
-from common.treenode.MyBST import MyBstNodeStringVal
+from common.treenode.MyBST import BstStrNode
 
 
-def deepest_node(root: MyBstNodeStringVal) -> int:
+def deepest_node(root: BstStrNode) -> int:
     # run bfs or dfs and track all the nodes with their depth,
     # return from the result a node with max depth
     # for dfs, O(n) in time, and O(n) in space
@@ -36,10 +36,10 @@ def deepest_node(root: MyBstNodeStringVal) -> int:
     return depth_memo[max(depth_memo.keys())][0]
 
 
-a = MyBstNodeStringVal('a')
-b = MyBstNodeStringVal('b')
-c = MyBstNodeStringVal('c')
-d = MyBstNodeStringVal('d')
+a = BstStrNode('a')
+b = BstStrNode('b')
+c = BstStrNode('c')
+d = BstStrNode('d')
 
 assert deepest_node(a) == a
 

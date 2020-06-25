@@ -1,8 +1,10 @@
-from common.treenode.MyBST import MyBstNodeIntVal
+from common.treenode.MyBST import BstIntNode
 
-def flatten(root: MyBstNodeIntVal) -> list:
+
+def flatten(root: BstIntNode) -> list:
     res = []
-    def in_order(node: MyBstNodeIntVal):
+
+    def in_order(node: BstIntNode):
         if node is None:
             return
         in_order(node.left)
@@ -12,13 +14,14 @@ def flatten(root: MyBstNodeIntVal) -> list:
     in_order(root)
     return res
 
-a = MyBstNodeIntVal(4)
-b = MyBstNodeIntVal(2)
-c = MyBstNodeIntVal(6)
-d = MyBstNodeIntVal(1)
-e = MyBstNodeIntVal(3)
-f = MyBstNodeIntVal(5)
-g = MyBstNodeIntVal(7)
+
+a = BstIntNode(4)
+b = BstIntNode(2)
+c = BstIntNode(6)
+d = BstIntNode(1)
+e = BstIntNode(3)
+f = BstIntNode(5)
+g = BstIntNode(7)
 
 a.left = b
 b.left = d
@@ -27,4 +30,4 @@ a.right = c
 c.left = f
 c.right = g
 
-assert flatten(a) == [1,2,3,4,5,6,7], "Actual: {}".format(flatten(a))
+assert flatten(a) == [1, 2, 3, 4, 5, 6, 7], "Actual: {}".format(flatten(a))

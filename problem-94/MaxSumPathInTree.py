@@ -5,13 +5,13 @@
 # Given a binary tree of integers, find the maximum path sum between two nodes. The path must go through at least one
 # node, and does not need to go through the root.
 
-from common.treenode.MyBST import MyBstNodeIntVal
+from common.treenode.MyBST import BstIntNode
 
 
-def max_sum_path(root: MyBstNodeIntVal) -> int:
+def max_sum_path(root: BstIntNode) -> int:
     cur_max = [0]  # using a object, in this case a list, reference so it's mutable from inner function
 
-    def recur(node: MyBstNodeIntVal):
+    def recur(node: BstIntNode):
         # given a node in the tree, there a few scenario
         # 1. this node is used with sum from left child
         # 2. this node is used with sum from right child
@@ -31,9 +31,9 @@ def max_sum_path(root: MyBstNodeIntVal) -> int:
     return cur_max[0]
 
 
-a = MyBstNodeIntVal(3)
-b = MyBstNodeIntVal(2)
-c = MyBstNodeIntVal(1)
+a = BstIntNode(3)
+b = BstIntNode(2)
+c = BstIntNode(1)
 #   3
 assert max_sum_path(a) == 3
 
@@ -46,10 +46,10 @@ assert max_sum_path(a) == 6
 #     3
 #  2     1
 # 4 2   1  3
-d = MyBstNodeIntVal(4)
-e = MyBstNodeIntVal(2)
-f = MyBstNodeIntVal(1)
-g = MyBstNodeIntVal(3)
+d = BstIntNode(4)
+e = BstIntNode(2)
+f = BstIntNode(1)
+g = BstIntNode(3)
 b.left = d
 b.right = e
 c.left = f

@@ -44,7 +44,6 @@ assert count_num_paths_dp(5, 5, ) == 70
 
 
 def count_num_paths_math(n: int, m: int) -> int:
-    # TBC: try doing the math nCm way
     if n == 0 or m == 0:
         return 0
     if n == 1 or m == 1:

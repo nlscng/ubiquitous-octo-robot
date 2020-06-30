@@ -31,11 +31,13 @@
 # tsr
 # Your function should return 3, since we would need to remove all the columns to order it.
 '''
+I guess this is the only optimization possible?
 remaining char available < remaining height available: remove this col
 
 row = 3
 r = 1
 '''
+
 
 def vert_order_matrix(matrix: list) -> int:
     if not matrix or len(matrix) == 0 or len(matrix[0]) == 0:
@@ -45,7 +47,7 @@ def vert_order_matrix(matrix: list) -> int:
     count = 0
     for c in range(col):
         for r in range(1, row):
-            if ord(matrix[r][c]) <= ord(matrix[r-1][c]) or ord('z') - ord(matrix[r][c]) < row - r - 1:
+            if ord(matrix[r][c]) <= ord(matrix[r - 1][c]) or ord('z') - ord(matrix[r][c]) < row - r - 1:
                 count += 1
                 break
 

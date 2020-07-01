@@ -4,34 +4,10 @@
 #
 # Given the head of a singly linked list, reverse it in-place.
 
-class SingleLinkedListNode:
-    def __init__(self, value=None, next=None):
-        self.value = value
-        self.next = next
-
-    def set_next(self, next):
-        self.next = next
-        return self
-
-    def set_value(self, value):
-        self.value = value
-        return self
-
-    def to_list(self, accu:list=None):
-        if accu is None:
-            res = [self.value]
-        else:
-            res = accu
-            res.append(self.value)
-        if self.next is not None:
-            self.next.to_list(res)
-        return res
-
-    def __str__(self):
-        return str(self.value) + str(self.next) if self.next is not None else str(self.value)
+from common.linked_list.MyLinkLlists import SinglyLinkedListNode
 
 
-def reverse_singly_linked_list(head: SingleLinkedListNode):
+def reverse_singly_linked_list(head: SinglyLinkedListNode):
     if not head or head.next is None:
         return head
 
@@ -47,6 +23,6 @@ def reverse_singly_linked_list(head: SingleLinkedListNode):
     return walker
 
 
-l_list = SingleLinkedListNode(1, SingleLinkedListNode(2, SingleLinkedListNode(3)))
+l_list = SinglyLinkedListNode(1, SinglyLinkedListNode(2, SinglyLinkedListNode(3)))
 assert l_list.to_list()[::-1] == reverse_singly_linked_list(l_list).to_list()
 

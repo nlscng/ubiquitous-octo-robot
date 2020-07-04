@@ -5,6 +5,7 @@
 # to another cell if they are next to each either on the same row or column. Note that two values of 1 are not part
 # of the same island if they’re sharing only a mutual “corner” (i.e. they are diagonally neighbors).
 
+# GG: this is similar to dfs in exploring neighbors
 
 def get_number_of_islands(binaryMatrix):
     # safety check
@@ -12,31 +13,31 @@ def get_number_of_islands(binaryMatrix):
 
     visited = set()
 
-    def explore_and_mark(row, col, arr, visited):
+    def explore_and_mark(row, col, arr):
         visited.add((row, col))  # mark this visited
         arr[row][col] = '*'
         # north
         if row > 0 and arr[row - 1][col] == 1 and (row - 1, col) not in visited:
-            explore_and_mark(row - 1, col, arr, visited)
+            explore_and_mark(row - 1, col, arr)
 
         # west
         if col > 0 and arr[row][col - 1] == 1 and (row, col - 1) not in visited:
-            explore_and_mark(row, col - 1, arr, visited)
+            explore_and_mark(row, col - 1, arr)
 
         # south
         if row < len(arr) - 1 and arr[row + 1][col] == 1 and (row + 1, col) not in visited:
-            explore_and_mark(row + 1, col, arr, visited)
+            explore_and_mark(row + 1, col, arr)
 
         # east
         if col < len(arr[0]) - 1 and arr[row][col + 1] == 1 and (row, col + 1) not in visited:
-            explore_and_mark(row, col + 1, arr, visited)
+            explore_and_mark(row, col + 1, arr)
 
     # spin through all cell
     for r in range(len(binaryMatrix)):
         for c in range(len(binaryMatrix[0])):
             if binaryMatrix[r][c] == 1:
                 counter += 1
-                explore_and_mark(r, c, binaryMatrix, visited)  # recursive visit ...
+                explore_and_mark(r, c, binaryMatrix)  # recursive visit ...
 
     return counter
 

@@ -9,6 +9,7 @@ from common.treenode.MyBST import BstIntNode
 
 
 def max_sum_path(root: BstIntNode) -> int:
+    # GG: interesting twist on tree recursion
     cur_max = [0]  # using a object, in this case a list, reference so it's mutable from inner function
 
     def recur(node: BstIntNode):

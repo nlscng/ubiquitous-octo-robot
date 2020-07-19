@@ -7,7 +7,7 @@ class SinglyLinkedListNode:
         self.next = next_node
         return self
 
-    def chain_set_next(self, next_node):
+    def chain_next(self, next_node):
         self.next = next_node
         return next_node
 
@@ -54,8 +54,8 @@ a2 = SinglyLinkedListNode(2)
 assert n0 == n0
 assert n0 != n1
 
-n0.chain_set_next(n1).chain_set_next(n2)
-a0.chain_set_next(a1).chain_set_next(a2)
+n0.chain_next(n1).chain_next(n2)
+a0.chain_next(a1).chain_next(a2)
 assert n0 == a0
 
 a1.set_value(42)

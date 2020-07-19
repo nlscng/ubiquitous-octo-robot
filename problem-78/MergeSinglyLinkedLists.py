@@ -68,13 +68,13 @@ n9 = SLLN(9)
 # assert merge([n1]) == n1
 
 list_238 = n2
-n2.chain_set_next(n3).chain_set_next(n8)
+n2.chain_next(n3).chain_next(n8)
 
 list_147 = n1
-n1.chain_set_next(n4).chain_set_next(n7)
+n1.chain_next(n4).chain_next(n7)
 
 list_0569 = n0
-n0.chain_set_next(n5).chain_set_next(n6).chain_set_next(n9)
+n0.chain_next(n5).chain_next(n6).chain_next(n9)
 
 a = SLLN(0, SLLN(1, SLLN(2, SLLN(3, SLLN(4, SLLN(5, SLLN(6, SLLN(7, SLLN(8, SLLN(9))))))))))
 assert merge([list_147, list_238, list_0569]) == a

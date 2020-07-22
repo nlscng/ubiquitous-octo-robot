@@ -86,6 +86,10 @@ class BstIntNode(_MyBinaryTreeStem):
             return False
         return self.val == other.val and super().__eq__(other)
 
+    def __hash__(self):
+        # note the hashing of val only
+        return hash(self.val)
+
     def reset(self):
         self.left = self.right = self.parent = None
 

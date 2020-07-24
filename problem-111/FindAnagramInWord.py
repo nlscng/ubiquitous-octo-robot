@@ -33,7 +33,7 @@ def have_same_counts(a: {}, b: {}) -> bool:
 
 
 def find_anagram(w: str, s: str) -> []:
-    # this is O(
+    # this is O(n * m) in time, where n is len(w) and m is len(s), and O(n) in space
     if not w or not s:
         return []
 

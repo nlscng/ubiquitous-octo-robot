@@ -9,6 +9,7 @@ from common.treenode.MyBST import BstStrNode
 
 
 def is_subtree(s: BstStrNode, t: BstStrNode) -> bool:
+    # GG: this is naive approach, and O(n * m) time, n and m are size of the trees
     def is_same(a: BstStrNode, b: BstStrNode) -> bool:
         # either bfs or dfs, check the tree for identical value and structure:
         if a is None and b is None:
@@ -51,9 +52,16 @@ d.left = b
 b.left = a
 
 g.left = f
+#   d     g(b)
+#  b     f(a)
+# a
 assert is_subtree(d, g)
 assert is_subtree(d, g)
 
+
+#    d          g(b)
+#  b   e    f(a)   h(c)
+# a c
 b.right = c
 d.right = e
 g.right = h

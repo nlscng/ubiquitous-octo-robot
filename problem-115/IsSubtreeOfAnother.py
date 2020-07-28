@@ -9,7 +9,8 @@ from common.treenode.MyBST import BstStrNode
 
 
 def is_subtree(s: BstStrNode, t: BstStrNode) -> bool:
-    # GG: this is naive approach, and O(n * m) time, n and m are size of the trees
+    # GG: this is naive approach, and O(n * m) time, n and m are size of the trees. There's a linear time solution, which relies
+    #  on the fact that a binary tree can be identified by its in-order and (pre or post)-order traversal
     def is_same(a: BstStrNode, b: BstStrNode) -> bool:
         # either bfs or dfs, check the tree for identical value and structure:
         if a is None and b is None:

@@ -30,6 +30,5 @@ def minimum_covering_range(intervals: list) -> []:
     return [min([end for start, end in intervals]), max([start for start, end in intervals])]
 
 
+assert minimum_covering_range([[0, 1], [1, 2], [3, 4]]) == [1, 3]
 assert minimum_covering_range([[0, 3], [2, 6], [3, 4], [6, 9]]) == [3, 6]
-
-

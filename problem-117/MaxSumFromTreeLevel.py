@@ -16,6 +16,7 @@ from common.treenode.MyBST import BstIntNode
 
 
 def max_level_sum(root: BstIntNode) -> int:
+    # this is O(n) in time and O(n) in space, n is number of nodes in bst
     if not root:
         return 0
 

@@ -40,11 +40,13 @@ def build_next_words(word_set: set, new_char, valid_word: str):
 
 
 def shortest_palindrome(word: str):
-    # let P(i, j) be the set of shortest possible palidrome that is using at least w_i, ... w_j, where i and j are
-    # indices to the given word.
-    # then P(i, j) is:
-    # if word[i:j+1] is itself a palindrome, word[i:j+1],
-    # or, union of (palindrome build from P(i, j-1) + word[j]) and (palindrome build from P(i+1, j) + word[i])
+    # GG: this is a very good interview question, quite tough too. I think my solution here is O(n^2) in time but O(
+    #  n^3) in space 
+
+    # let P(i, j) be the set of shortest possible palidrome that is using at least w_i, ... w_j,
+    # where i and j are indices to the given word. then P(i, j) is: if word[i:j+1] is itself a palindrome,
+    # word[i:j+1], or, union of (palindrome build from P(i, j-1) + word[j]) and (palindrome build from P(i+1,
+    # j) + word[i])
 
     # essentially we are two walkers walking inwards from the edges of the given word
     if not word or not isinstance(word, str):
@@ -60,7 +62,8 @@ def shortest_palindrome(word: str):
         for i in range(n - width):
             j = i + width
             cell_self = word[i:j + 1]
-            if is_palindrome(cell_self):
+            # if is_palindrome(cell_self):
+            if word[i] == word[j]:
                 memo[i][j] = {cell_self}
             else:
                 from_left = build_next_words(memo[i][j - 1], word[j], word[i:j + 1])

@@ -1,10 +1,10 @@
-from common.treenode.MyBST import BstIntNode
+from common.treenode.MyBST import IntNode
 
 
-def flatten(root: BstIntNode) -> list:
+def flatten(root: IntNode) -> list:
     res = []
 
-    def in_order(node: BstIntNode):
+    def in_order(node: IntNode):
         if node is None:
             return
         in_order(node.left)
@@ -15,13 +15,13 @@ def flatten(root: BstIntNode) -> list:
     return res
 
 
-a = BstIntNode(4)
-b = BstIntNode(2)
-c = BstIntNode(6)
-d = BstIntNode(1)
-e = BstIntNode(3)
-f = BstIntNode(5)
-g = BstIntNode(7)
+a = IntNode(4)
+b = IntNode(2)
+c = IntNode(6)
+d = IntNode(1)
+e = IntNode(3)
+f = IntNode(5)
+g = IntNode(7)
 
 a.left = b
 b.left = d

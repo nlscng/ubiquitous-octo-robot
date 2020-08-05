@@ -27,10 +27,10 @@ walk through the given example
 set:10, 15
 """
 
-from common.treenode.MyBST import BstIntNode
+from common.treenode.MyBST import IntNode
 
 
-def two_sum_tree(root: BstIntNode, k: int) -> []:
+def two_sum_tree(root: IntNode, k: int) -> []:
     # this is O(n) in time and O(n) in space
     if not root:
         return []
@@ -55,11 +55,11 @@ def two_sum_tree(root: BstIntNode, k: int) -> []:
     return []
 
 
-a = BstIntNode(10)
-b = BstIntNode(5)
-c = BstIntNode(15)
-d = BstIntNode(11)
-e = BstIntNode(15)
+a = IntNode(10)
+b = IntNode(5)
+c = IntNode(15)
+d = IntNode(11)
+e = IntNode(15)
 
 a.left = b
 a.right = c

@@ -12,10 +12,10 @@ time keep a current max_sum, update it as we go along the levels
 
 """
 
-from common.treenode.MyBST import BstIntNode
+from common.treenode.MyBST import IntNode
 
 
-def max_level_sum(root: BstIntNode) -> int:
+def max_level_sum(root: IntNode) -> int:
     # this is O(n) in time and O(n) in space, n is number of nodes in bst
     if not root:
         return 0
@@ -47,13 +47,13 @@ def max_level_sum(root: BstIntNode) -> int:
 #      3
 #   4      2
 # -3 1  -5  2
-a = BstIntNode(3)
-b = BstIntNode(4)
-c = BstIntNode(2)
-d = BstIntNode(-3)
-e = BstIntNode(1)
-f = BstIntNode(-5)
-g = BstIntNode(2)
+a = IntNode(3)
+b = IntNode(4)
+c = IntNode(2)
+d = IntNode(-3)
+e = IntNode(1)
+f = IntNode(-5)
+g = IntNode(2)
 a.left = b
 a.right = c
 b.left = d

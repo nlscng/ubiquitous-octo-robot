@@ -15,7 +15,7 @@ class _MyBinaryTreeStem:
         raise Exception('not implemented')
 
 
-class BstStrNode(_MyBinaryTreeStem):
+class StrNode(_MyBinaryTreeStem):
     def __init__(self, val: str, left=None, right=None, parent=None):
         super().__init__(left, right, parent)
         self.val = val
@@ -33,7 +33,7 @@ class BstStrNode(_MyBinaryTreeStem):
         return res
 
     def __eq__(self, other):
-        if other is None or not isinstance(other, BstStrNode):
+        if other is None or not isinstance(other, StrNode):
             return False
         return self.val == other.val and super().__eq__(other)
 
@@ -41,7 +41,7 @@ class BstStrNode(_MyBinaryTreeStem):
         self.left = self.right = self.parent = None
 
     def deepcopy(self):
-        new_node = BstStrNode(self.val)
+        new_node = StrNode(self.val)
 
         if self.left is not None:
             new_left = self.left.deepcopy()
@@ -52,10 +52,10 @@ class BstStrNode(_MyBinaryTreeStem):
         return new_node
 
 
-a = BstStrNode('a')
-b = BstStrNode('b')
-c = BstStrNode('c')
-d = BstStrNode('d')
+a = StrNode('a')
+b = StrNode('b')
+c = StrNode('c')
+d = StrNode('d')
 a.left = b
 a.right = c
 # b.parent = a
@@ -68,7 +68,7 @@ a_copy = a.deepcopy()
 assert a == a_copy
 
 
-class BstIntNode(_MyBinaryTreeStem):
+class IntNode(_MyBinaryTreeStem):
     def __init__(self, val: int, left=None, right=None, parent=None):
         super().__init__(left, right, parent)
         self.val = val
@@ -82,7 +82,7 @@ class BstIntNode(_MyBinaryTreeStem):
         return str(res)
 
     def __eq__(self, other):
-        if other is None or not isinstance(other, BstIntNode):
+        if other is None or not isinstance(other, IntNode):
             return False
         return self.val == other.val and super().__eq__(other)
 
@@ -94,10 +94,10 @@ class BstIntNode(_MyBinaryTreeStem):
         self.left = self.right = self.parent = None
 
 
-a = BstIntNode(1)
-b = BstIntNode(2)
-c = BstIntNode(3)
-d = BstIntNode(4)
+a = IntNode(1)
+b = IntNode(2)
+c = IntNode(3)
+d = IntNode(4)
 a.left = b
 a.right = c
 # b.parent = a

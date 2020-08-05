@@ -12,10 +12,10 @@
 # that is, this above tree should return [5, 9, 3, 2, 6, 1, 7, 4, 8], 5 adn 9 being the same
 # column, 3 and 2 the same, 6, 1 and 7  the same column
 
-from common.treenode.MyBST import BstIntNode
+from common.treenode.MyBST import IntNode
 
 
-def col_print_tree(root: BstIntNode) -> list:
+def col_print_tree(root: IntNode) -> list:
     # bfs the tree nodes to get a processed info for each column and its node
     # bfs will maintain depth first, aka deeper nodes will come after.
 
@@ -52,15 +52,15 @@ def col_print_tree(root: BstIntNode) -> list:
     return res
 
 
-a = BstIntNode(6)
-b = BstIntNode(3)
-c = BstIntNode(4)
-d = BstIntNode(5)
-e = BstIntNode(1)
-f = BstIntNode(8)
-g = BstIntNode(2)
-h = BstIntNode(9)
-i = BstIntNode(7)
+a = IntNode(6)
+b = IntNode(3)
+c = IntNode(4)
+d = IntNode(5)
+e = IntNode(1)
+f = IntNode(8)
+g = IntNode(2)
+h = IntNode(9)
+i = IntNode(7)
 a.left = b
 a.right = c
 b.left = d

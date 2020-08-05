@@ -5,13 +5,13 @@
 # Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with
 # a subtree of s. A subtree of s is a tree consists of a node in s and all of this node's descendants. The tree s
 # could also be considered as a subtree of itself.
-from common.treenode.MyBST import BstStrNode
+from common.treenode.MyBST import StrNode
 
 
-def is_subtree(s: BstStrNode, t: BstStrNode) -> bool:
+def is_subtree(s: StrNode, t: StrNode) -> bool:
     # GG: this is naive approach, and O(n * m) time, n and m are size of the trees. There's a linear time solution, which relies
     #  on the fact that a binary tree can be identified by its in-order and (pre or post)-order traversal
-    def is_same(a: BstStrNode, b: BstStrNode) -> bool:
+    def is_same(a: StrNode, b: StrNode) -> bool:
         # either bfs or dfs, check the tree for identical value and structure:
         if a is None and b is None:
             return True
@@ -35,15 +35,15 @@ def is_subtree(s: BstStrNode, t: BstStrNode) -> bool:
     return False
 
 
-a = BstStrNode('a')
-b = BstStrNode('b')
-c = BstStrNode('c')
-d = BstStrNode('d')
-e = BstStrNode('e')
+a = StrNode('a')
+b = StrNode('b')
+c = StrNode('c')
+d = StrNode('d')
+e = StrNode('e')
 
-f = BstStrNode('a')
-g = BstStrNode('b')
-h = BstStrNode('c')
+f = StrNode('a')
+g = StrNode('b')
+h = StrNode('c')
 
 #       g               d
 #      f h           b     e

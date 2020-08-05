@@ -18,10 +18,10 @@
 #  c  b
 #  \  / \
 
-from common.treenode.MyBST import BstStrNode
+from common.treenode.MyBST import StrNode
 
 
-def invert_bst(root: BstStrNode) -> BstStrNode:
+def invert_bst(root: StrNode) -> StrNode:
     if root is None:
         return root
 
@@ -32,12 +32,12 @@ def invert_bst(root: BstStrNode) -> BstStrNode:
     return root
 
 
-a = BstStrNode('a')
-b = BstStrNode('b')
-c = BstStrNode('c')
-d = BstStrNode('d')
-e = BstStrNode('e')
-f = BstStrNode('f')
+a = StrNode('a')
+b = StrNode('b')
+c = StrNode('c')
+d = StrNode('d')
+e = StrNode('e')
+f = StrNode('f')
 
 a_copy = a.deepcopy()
 assert invert_bst(a) == a_copy

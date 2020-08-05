@@ -5,12 +5,12 @@
 # Given a tree, find the largest tree/subtree that is a BST.
 #
 # Given a tree, return the size of the largest tree/subtree that is a BST.
-from common.treenode.MyBST import BstIntNode
+from common.treenode.MyBST import IntNode
 import sys
 
 
-def largest_bst_subtree(root: BstIntNode) -> bool:
-    def recur(node: BstIntNode) -> (bool, int, int, int):
+def largest_bst_subtree(root: IntNode) -> bool:
+    def recur(node: IntNode) -> (bool, int, int, int):
         if node is None:
             # GG: watch out for the positive min and negative max, it's done so all future boundary check is valid
             return True, 0, sys.maxsize, -sys.maxsize
@@ -40,11 +40,11 @@ def largest_bst_subtree(root: BstIntNode) -> bool:
     return size_largest_bst_sub
 
 
-a = BstIntNode(1)
-b = BstIntNode(2)
-c = BstIntNode(3)
-d = BstIntNode(4)
-e = BstIntNode(5)
+a = IntNode(1)
+b = IntNode(2)
+c = IntNode(3)
+d = IntNode(4)
+e = IntNode(5)
 # single note tree
 assert largest_bst_subtree(a) == 1
 

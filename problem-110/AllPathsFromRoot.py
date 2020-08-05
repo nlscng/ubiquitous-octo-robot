@@ -19,10 +19,10 @@ modified dfs might be a start, and it's O(n) in time and O(h) in space, n is num
 
 '''
 
-from common.treenode.MyBST import BstIntNode
+from common.treenode.MyBST import IntNode
 
 
-def find_all_paths(root: BstIntNode) -> []:
+def find_all_paths(root: IntNode) -> []:
     if not root:
         return []
 
@@ -61,11 +61,11 @@ def find_all_paths(root: BstIntNode) -> []:
     return all_paths
 
 
-a = BstIntNode(1)
-b = BstIntNode(2)
-c = BstIntNode(3)
-d = BstIntNode(4)
-e = BstIntNode(5)
+a = IntNode(1)
+b = IntNode(2)
+c = IntNode(3)
+d = IntNode(4)
+e = IntNode(5)
 a.left = b
 a.right = c
 c.left = d

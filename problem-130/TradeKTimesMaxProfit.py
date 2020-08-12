@@ -16,8 +16,34 @@ and y axis holds number of purchases (or maybe number of transaction, aka buy, s
 1st
 2nd
 
-let p be maximum profit possible on ith day with k purchase completed.
-p(i, k) = max p(0 ... i-1, k -1) +
+let p be maximum profit possible on ith day with j purchase completed.
+p(i, j) = max of the two scenario:
+    p(i, j -1), the same profit as the day before if we dont complete any transactions on j day
+    p(i - 1, m) + (price(j) - price(m)), 0 < m < j, we sell (and assume we bought on m day)
 """
 
-# TBC
+
+# GG: review this, this trade for max profit with k transaction is the hardest in the trade for profit, where trade
+#  once and unlimited are both eaiser
+#  See self-7 for unlimited trade, and problem-47 for trading just once
+
+
+def trade_k_times(prices: list, k: int) -> int:
+    # this version is O(k * n^2) in time, and O(k * n) in space
+    assert len(prices) > 1 and k > 0
+    n = len(prices)
+
+    memo = [[0 for _ in range(n)] for _ in range(k + 1)]  # note the k goes from 0 to k transaction
+    assert len(memo) == k + 1 and len(memo[0]) == n
+
+    for i in range(1, k + 1):
+        for j in range(1, n):
+            possible_profit = max([prices[j] - prices[m] + memo[i - 1][m] for m in range(0, j)])
+            memo[i][j] = max(memo[i][j - 1], possible_profit)
+
+    return memo[k][n - 1]
+
+
+assert trade_k_times([5, 2, 4, 0, 1], 2) == 3, "Actual: {}".format(trade_k_times([5, 2, 4, 0, 1], 2))
+assert trade_k_times([3, 1, 5, 8, 2, 7], 2) == 12, "Actual: {}".format(trade_k_times([3, 1, 5, 8, 2, 7], 2))
+assert trade_k_times([3,5,3,5,3,5], 2) == 4

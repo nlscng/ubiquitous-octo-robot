@@ -22,14 +22,15 @@ p(i, j) = max of the two scenario:
     p(i - 1, m) + (price(j) - price(m)), 0 < m < j, we sell (and assume we bought on m day)
 """
 
-
 # GG: review this, this trade for max profit with k transaction is the hardest in the trade for profit, where trade
 #  once and unlimited are both eaiser
 #  See self-7 for unlimited trade, and problem-47 for trading just once
 
+import sys
+
 
 def trade_k_times(prices: list, k: int) -> int:
-    # this version is O(k * n^2) in time, and O(k * n) in space
+    # this version, keeping the 'currently seen max possible profit from past', is O(kn) in time, and O(kn) in space
     assert len(prices) > 1 and k > 0
     n = len(prices)
 
@@ -37,8 +38,15 @@ def trade_k_times(prices: list, k: int) -> int:
     assert len(memo) == k + 1 and len(memo[0]) == n
 
     for i in range(1, k + 1):
+        cur_max = -sys.maxsize
         for j in range(1, n):
-            possible_profit = max([prices[j] - prices[m] + memo[i - 1][m] for m in range(0, j)])
+            ## the O(k n^2) version
+            # possible_profit = max([prices[j] - prices[m] + memo[i - 1][m] for m in range(0, j)])
+
+            ## the O(kn) version
+            cur_max = max(cur_max, memo[i - 1][j - 1] - prices[j - 1])
+            possible_profit = prices[j] + cur_max
+            
             memo[i][j] = max(memo[i][j - 1], possible_profit)
 
     return memo[k][n - 1]
@@ -46,4 +54,4 @@ def trade_k_times(prices: list, k: int) -> int:
 
 assert trade_k_times([5, 2, 4, 0, 1], 2) == 3, "Actual: {}".format(trade_k_times([5, 2, 4, 0, 1], 2))
 assert trade_k_times([3, 1, 5, 8, 2, 7], 2) == 12, "Actual: {}".format(trade_k_times([3, 1, 5, 8, 2, 7], 2))
-assert trade_k_times([3,5,3,5,3,5], 2) == 4
+assert trade_k_times([3, 5, 3, 5, 3, 5], 2) == 4

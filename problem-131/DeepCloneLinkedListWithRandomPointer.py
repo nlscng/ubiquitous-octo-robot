@@ -29,7 +29,7 @@ seen: {
 
 
 # GG: very tricky mind blocker of pointer manipulation. I went down the route of recursion and that's harder to think
-#  through 
+#  through
 
 class RandomLinkedListNode:
     def __init__(self, val: int, nxt=None, randomNxt=None):

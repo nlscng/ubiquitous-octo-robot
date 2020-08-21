@@ -72,3 +72,30 @@ assert get_factors([]) == []
 assert get_factors([1, 2, 3, 4]) == [24, 12, 8, 6]
 assert get_factors([3, 9, 7, 1]) == [63, 21, 27, 27 * 7]
 assert get_factors([3, 4, 5, 6]) == [120, 90, 72, 60]
+
+
+# Came across this on pramp on Aug 21st
+
+def array_of_array_products(arr):
+    if len(arr) < 2:
+        return []
+
+    res = []
+
+    # forward scan
+    cur_pro = 1
+    for i in range(len(arr)):
+        res.append(cur_pro)
+        cur_pro *= arr[i]
+
+    cur_pro = 1
+    for i in reversed(range(len(arr))):
+        res[i] = res[i] * cur_pro
+        cur_pro *= arr[i]
+
+    return res
+
+
+assert array_of_array_products([2, 3, 0, 982, 10]) == [0, 0, 58920, 0, 0]
+assert array_of_array_products([-3, 17, 430, -6, 5, -12, -11, 5]) == [-144738000, 25542000, 1009800, -72369000,
+                                                                      86842800, -36184500, -39474000, 86842800]

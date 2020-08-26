@@ -12,6 +12,9 @@
 
 # GG: I have no clue how to start this one on first look.
 
+# GG: day 2, gave up trying to figure out myself, and found this is ultimately a variant of largest rectangle in
+#  histogram problem
+
 """
 1 0 0 0
 1 0 1 1
@@ -45,31 +48,58 @@
 2: 2
 3: 3
 4: 3
+
+2,3,0,1,2
+k, v: 1, 3
+cur_max:
+start idx: 0
+max height: 2
 """
 
-import sys
+
+def largest_rect_histogram(count: []) -> int:
+    # this is O(n) in time, and O(n) in space
+    cur_max = 0
+    idx_stack = []  # this will store indices, indicating potential starting point for a rectangle to calculate for.
+    height_stack = []
+    for idx, v in enumerate(count):
+        if len(idx_stack) == 0 or v > height_stack[-1]:
+            idx_stack.append(idx)
+            height_stack.append(v)
+        elif v < height_stack[-1]:
+            # there are starting positions pushed into the stack already
+            starting_idx = idx_stack[-1]
+            while len(height_stack) > 0 and height_stack[-1] > v:
+                starting_idx = idx_stack.pop()
+                expiring_height = height_stack.pop()
+                width = idx - starting_idx
+                cur_max = max(cur_max, width * expiring_height)
+            # GG: this next part is critical, you push back the starting idx for a next rectangle, which is your last popped
+            idx_stack.append(starting_idx)
+            height_stack.append(v)
+
+    n = len(count)
+    while len(idx_stack) > 0:
+        starting_idx = idx_stack.pop()
+        expiring_height = height_stack.pop()
+        width = n - starting_idx
+        cur_max = max(cur_max, width * expiring_height)
+    return cur_max
+
+
+assert largest_rect_histogram([2, 3, 0, 1, 2]) == 4
+assert largest_rect_histogram([1, 2, 3, 1, 2]) == 5
+assert largest_rect_histogram([1, 2, 4, 4]) == 8
+assert largest_rect_histogram([3, 2, 3, 3]) == 8
 
 
 def largest_rect(matrix: list) -> int:
+    # let n be num of rows, m be number of cols, then this is O(n*m) in time and O(n*m) in space
     assert len(matrix) > 0 and len(matrix[0]) > 0
     n = len(matrix)
     m = len(matrix[0])
 
-    def cur_max_rect(count: dict) -> int:
-        cur_max = 0
-        cur_height = sys.maxsize
-        cur_width = 0
-        for k, v in count.items():
-            if v != 0:
-                cur_width += 1
-                cur_height = min(cur_height, v)
-                cur_max = max(cur_max, cur_height * cur_width, v)
-            else:
-                cur_width = 0
-                cur_height = sys.maxsize
-        return cur_max
-
-    running_count = {k: 0 for k in range(m)}
+    running_count = [0 for _ in range(m)]
     cur_max_area = 0
     for r in range(n):
         for c in range(m):
@@ -77,7 +107,7 @@ def largest_rect(matrix: list) -> int:
                 running_count[c] += 1
             else:
                 running_count[c] = 0
-        cur_max_area = max(cur_max_area, cur_max_rect(running_count))
+        cur_max_area = max(cur_max_area, largest_rect_histogram(running_count))
 
     return cur_max_area
 

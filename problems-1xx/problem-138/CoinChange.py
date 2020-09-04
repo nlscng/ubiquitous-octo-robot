@@ -26,26 +26,24 @@ n = 16,
 k = 3, with a 10, 5 and 1
 
 """
+
+# GG: first version was a 2D memo table, but this can be optimized to use memory of just O(n). Pretty tricky, but sweet
+
 coins = [1, 5, 10, 25]
 
+
 def coin_change(n: int) -> int:
+    # Optimized version is O(n * c) in time, but O(n) in space, where n is target sum and c is number of type of coins
     assert n > 0
     k = 0
     n_coin_type = len(coins)
-    memo = [[0 for _ in range(n+1)] for _ in range(n_coin_type)] # note the col, the money value is 1 indexed
+    memo = [i for i in range(n + 1)]
 
-    # init the first row, where all cell are coins needed to count for x value with just the 1 cent coin
-    for i in range(len(memo[0])):
-        memo[0][i] = i
-
-    for r in range(1, len(memo)):
-        for c in range(1, len(memo[0])):
-            coin_value = coins[r]
-            if coin_value > c:
-                memo[r][c] = memo[r -1][c]
-            else:
-                memo[r][c] = memo[r][c - coin_value] + 1
-    return memo[n_coin_type - 1][n]
+    for i in range(1, len(memo)):
+        for coin_value in coins:
+            if coin_value <= i:
+                memo[i] = memo[i - coin_value] + 1
+    return memo[-1]
 
 
 assert coin_change(3) == 3

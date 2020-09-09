@@ -20,14 +20,14 @@ class PeekableInterface(object):
     def __init__(self, iterator):
         assert iterator is not None
         self.iterator = iterator
-        self.my_next = iterator.next()
+        self.my_next = self.iterator.next() if self.hasNext() else None
 
     def peek(self):
         return self.my_next
 
     def next(self):
         res = self.my_next
-        self.my_next = self.iterator.next()
+        self.my_next = self.iterator.next() if self.hasNext() else None
         return res
 
     def hasNext(self):

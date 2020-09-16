@@ -41,8 +41,9 @@ def uniques_in_dupes(array: list):
 
     # we xor all numbers into two groups, each xor-ing each other in group, again using the fact same number xor-ing
     # themselves will cancel the bits out to zero
+    diff_bit_mask = 1 << diff_bit_idx
     for i in array:
-        if i & (1 << diff_bit_idx) == 0:
+        if i & diff_bit_mask == 0:
             a = a ^ i
         else:
             b = b ^ i

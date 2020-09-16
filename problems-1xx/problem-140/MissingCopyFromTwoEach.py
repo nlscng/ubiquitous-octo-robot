@@ -21,6 +21,34 @@ This won't be space efficient ...
 But is this really O(1) in space? It feels more like O(log n)
 """
 
-# GG: this turns out to be another XOR problem. I think the space complexity of O(1) is a clue.
+
+# GG: this turns out to be another XOR problem. I think the space complexity of O(1) is a clue. Probably the best xor
+#  problem
 # SEE: https://medium.com/@gurupad93/two-numbers-that-appear-once-b89e92a9334b
 
+def uniques_in_dupes(array: list):
+    a, b = 0, 0
+    xor_all = 0
+    for i in array:
+        xor_all = xor_all ^ i
+
+    # search for one bit, any bit, that's set to 1, because they can tell the two unique number apart.
+    diff_bit_idx = 0
+    for i in range(0, 32):
+        if xor_all & (1 << i) != 0:  # this is important to use " != 0 ", we are testing for bit wise equality
+            diff_bit_idx = i
+            break
+
+    # we xor all numbers into two groups, each xor-ing each other in group, again using the fact same number xor-ing
+    # themselves will cancel the bits out to zero
+    for i in array:
+        if i & (1 << diff_bit_idx) == 0:
+            a = a ^ i
+        else:
+            b = b ^ i
+    return [a, b]
+
+
+assert uniques_in_dupes([1, 2, 3, 1]) == [2, 3]
+assert uniques_in_dupes([1, 2, 3, 2]) == [1, 3], "Actual: {}".format(uniques_in_dupes([1, 2, 3, 2]))
+assert uniques_in_dupes([1, 2, 3, 4, 5, 1, 4, 5]) == [2, 3]

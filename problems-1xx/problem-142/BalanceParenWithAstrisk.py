@@ -26,28 +26,52 @@ def is_balanced(a: chr, b: chr) -> bool:
     return False
 
 
+# def is_balanced_with_parens_asterisks(s: str) -> bool:
+#     if s == '':
+#         return True
+#
+#     n = len(s)
+#     memo = [[False for _ in range(n)] for _ in range(n)]
+#     for i in range(n):
+#         if s[i] == '*':
+#             memo[i][i] = True
+#         if i + 1 < n:
+#             if is_balanced(s[i], s[i + 1]):
+#                 memo[i][i + 1] = True
+#
+#     for window_size in range(2, n):
+#         for r in range(n - window_size):
+#             c = r + window_size
+#             if memo[r + 1][c - 1] and is_balanced(s[r], s[c]):
+#                 memo[r][c] = True
+#             else:
+#                 for i in range(r, c + 1):
+#                     if memo[r][i]:
+#                         if (is_balanced(s[i + 1], s[c]) and i + 1 < c and memo[i+1][c-1]) or (is_balanced(s[i+1], s[c])):
+#                             memo[r][c] = True
+#
+#     return memo[0][n - 1]
+
+# GG: I went for dynamic programming solution, but there are more efficient ones. Plus I failed at the dp version
+# SEE: https://leetcode.com/problems/valid-parenthesis-string/discuss/?currentPage=1&orderBy=most_votes&query=
 def is_balanced_with_parens_asterisks(s: str) -> bool:
-    if s == '':
-        return True
-
-    n = len(s)
-    memo = [[False for _ in range(n)] for _ in range(n)]
-    for i in range(n):
-        if s[i] == '*':
-            memo[i][i] = True
-        if i + 1 < n:
-            if is_balanced(s[i], s[i + 1]):
-                memo[i][i + 1] = True
-
-    for window_size in range(2, n):
-        for r in range(n - window_size):
-            c = r + window_size
-            if (memo[r + 1][c - 1] and is_balanced(s[r], s[c])) or \
-                    (memo[r][c - 1] and s[c] == '*') or \
-                    (memo[r + 1][c] and s[r] == '*') or \
-                    (memo[r][c - 2] and is_balanced(s[c - 1], s[c])):
-                memo[r][c] = True
-    return memo[0][n - 1]
+    # assert len(s) > 0
+    max_valid_open, min_valid_close = 0, 0
+    for c in s:
+        if c == '(':
+            max_valid_open += 1
+            min_valid_close += 1
+        elif c == ')':
+            max_valid_open -= 1
+            min_valid_close -= 1
+        else:
+            # c == '*'
+            max_valid_open += 1
+            min_valid_close -= 1
+        if max_valid_open < 0:
+            return False
+        min_valid_close = max(min_valid_close, 0)
+    return min_valid_close == 0
 
 
 assert is_balanced_with_parens_asterisks("")
@@ -72,3 +96,5 @@ assert is_balanced_with_parens_asterisks('(()*)()')
 assert is_balanced_with_parens_asterisks('(())*()')
 assert is_balanced_with_parens_asterisks('()(()*')
 assert is_balanced_with_parens_asterisks('()((*)')
+
+

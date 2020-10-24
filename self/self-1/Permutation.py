@@ -28,3 +28,28 @@ assert all(x in my_permu([1, 2]) for x in permutations([1, 2])), 'Actual output:
     my_permu([1, 2]))
 assert all(x in my_permu([1, 2, 3]) for x in permutations([1, 2, 3])), 'Actual output: {}'.format(
     my_permu([1, 2, 3]))
+
+
+def permu(lis: list) -> list:
+    assert lis
+
+    res = []
+
+    def inner(cur: list, left: list):
+        if not left:
+            res.append(cur)
+
+        for i in range(len(left)):
+            one = left[i]
+            rest = left[:i] + left[i + 1:]
+            next_cur = cur.copy()
+            next_cur.append(one)
+            inner(next_cur, rest)
+
+    inner([], lis)
+    return res
+
+
+assert permu([1]) == [[1]]
+assert permu([1, 2]) == [[1, 2], [2, 1]]
+assert permu([1, 2, 3]) == [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]

@@ -11,7 +11,7 @@
 #
 # Do this in O(N) time.
 
-def find_max_sum_subarray(arr: list) -> int:
+def find_max_sum_subarray_two_ptrs(arr: list) -> int:
     f_ptr, s_ptr = 0, 0  # fast ptr, slow ptr
 
     cur_max = 0
@@ -32,15 +32,15 @@ def find_max_sum_subarray(arr: list) -> int:
     return cur_max
 
 
-assert find_max_sum_subarray([1, -1, 1, -1]) == 1
-assert find_max_sum_subarray([1, 2, 0, 3, 4]) == 10
-assert find_max_sum_subarray([1, 2, -4, 3, 4]) == 7
-assert find_max_sum_subarray([34, -50, 42, 14, -5, 86]) == 137
-assert find_max_sum_subarray([-5, -1, -8, -9]) == 0
+assert find_max_sum_subarray_two_ptrs([1, -1, 1, -1]) == 1
+assert find_max_sum_subarray_two_ptrs([1, 2, 0, 3, 4]) == 10
+assert find_max_sum_subarray_two_ptrs([1, 2, -4, 3, 4]) == 7
+assert find_max_sum_subarray_two_ptrs([34, -50, 42, 14, -5, 86]) == 137
+assert find_max_sum_subarray_two_ptrs([-5, -1, -8, -9]) == 0
 
 
 def max_sum_subarray_dp(lis: list) -> int:
-    # This is O(n) in time and O(n) in space
+    # This is O(n) in time and O(n) in space, not as performant as the two pointers
     assert lis
     n = len(lis)
 

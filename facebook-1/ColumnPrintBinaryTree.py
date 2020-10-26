@@ -28,7 +28,7 @@ def col_print_tree(root: IntNode) -> list:
     min_col, max_col = 0, 0
 
     while len(queue) > 0:
-        walker = queue.pop()
+        walker = queue.pop(0)
         node, col = walker
         # add to dict
         if col not in dict:

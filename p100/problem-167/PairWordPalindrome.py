@@ -14,6 +14,8 @@ suffix is itself a palindrome.
 Start by inventory the list of words for easy lookup (with a dict), then spin through them one by one. Take one word, check if any paritial (or full) of it, reversed, is found in another place in the dict.
 """
 
+# GG: very good question on string manipulation
+
 
 def is_palindrome(w: str) -> bool:
     return w == w[::-1]

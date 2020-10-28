@@ -16,7 +16,7 @@ and y axis holds number of purchases (or maybe number of transaction, aka buy, s
 1st
 2nd
 
-let p be maximum profit possible on ith day with j purchase completed.
+let p be maximum profit possible with i-th purchase completed on j-th day
 p(i, j) = max of the two scenario:
     p(i, j -1), the same profit as the day before if we dont complete any transactions on j day
     p(i - 1, m) + (price(j) - price(m)), 0 < m < j, we sell (and assume we bought on m day)

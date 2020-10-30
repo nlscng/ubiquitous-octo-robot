@@ -30,6 +30,10 @@ assert all(x in my_permu([1, 2, 3]) for x in permutations([1, 2, 3])), 'Actual o
     my_permu([1, 2, 3]))
 
 
+# This is asked during a facebook coding interview session; I however failed to answer the complexity correctly. The
+# interviewer also asked to optimize in terms of memory, and I didn't do that.
+# Looking back now, I'd think time complexity is O(n!) and space O(n! * n)
+
 def permu(lis: list) -> list:
     assert lis
 

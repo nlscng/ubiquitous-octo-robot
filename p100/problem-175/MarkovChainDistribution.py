@@ -17,8 +17,6 @@
 # ]
 # One instance of running this Markov chain might produce { 'a': 3012, 'b': 1656, 'c': 332 }.
 
-# TBC
-
 # GG: this is a stationary markov chain distribution problem, GT lectures covered the basis for it.
 
 # GG: good question to review

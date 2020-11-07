@@ -8,7 +8,7 @@
 
 """
 This might be actually just comparing number of unique characters in both strings, as functional mappings is a -> b,
-and it's ok if domain of A is >= domain of B
+and it's ok if domain of A is >= domain of B. But the question is specifically asking for 1 to 1 mapping. So, meh.
 """
 
 def is_mappable(a: str, b: str):
@@ -18,7 +18,7 @@ def is_mappable(a: str, b: str):
     count_a = len(set([c for c in a]))
     count_b = len(set([c for c in b]))
 
-    return count_a >= count_b
+    return count_a == count_b
 
 
 assert is_mappable('abc', 'bcd')

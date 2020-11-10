@@ -38,7 +38,8 @@ def schedule_job_with_start(start: int, dur: int, lis: list) -> bool:
         # m, the mid point for normal binary search, here its pointed to the left occupied time slot
         if fits([lis[m][1] + 1, lis[m + 1][0] - 1], [start, end]):
             return True
-        if fits(lis[m], [start, end]) or fits(lis[m + 1], [start, end]):
+        # if fits(lis[m], [start, end]) or fits(lis[m + 1], [start, end]):
+        if start <= lis[m][1] <= end or start <= lis[m][1] <= end:
             return False
 
         if lis[m + 1][1] < start:

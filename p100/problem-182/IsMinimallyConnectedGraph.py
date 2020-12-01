@@ -13,24 +13,75 @@ So a tree with n node has n-1 edge, is full connected and no cycle.
 from collections import deque
 
 
-def is_minimally_connected(graph: list) -> bool:
+def is_minimally_connected(graph: {}) -> bool:
+    # I am using a single run of DFS for this check, so this should be O(v+e) in time and space
     assert graph
 
     visited = set()
-    num_nodes = 0
-    num_edges = 0
 
-    walker = graph[0][0]
-    queue = deque([walker])
+    walker = list(graph.keys())[0]
+    queue = deque([(None, walker)])
 
     while len(queue) > 0:
-        walker = queue.popleft()
+        parent, walker = queue.pop()
         if walker not in visited:
             visited.add(walker)
 
-        #TBC
+        neighbors = [x for x in graph[walker] if parent is None or x != parent]
+        if len([x for x in neighbors if x in visited]) > 0:
+            # cycle detected
+            return False
+        queue.extend(list(zip([walker for _ in range(len(neighbors))], neighbors)))
 
-    pass
+    return len(visited) == len(graph.keys())
 
 
+# a - b - d
+# |     \
+# c       e
+t = {
+    'a': ['b', 'c'],
+    'b': ['a', 'e', 'd'],
+    'c': ['a'],
+    'd': ['b'],
+    'e': ['b']
+}
 
+assert is_minimally_connected(t)
+
+
+# a - b - d
+# |     \ |
+# c       e
+u = {
+    'a': ['b', 'c'],
+    'b': ['a', 'e', 'd'],
+    'c': ['a'],
+    'd': ['b', 'e'],
+    'e': ['b', 'd']
+}
+assert not is_minimally_connected(u)
+
+# a - b - d
+# |
+# c       e
+v = {
+    'a': ['b', 'c'],
+    'b': ['a', 'd'],
+    'c': ['a'],
+    'd': ['b'],
+    'e': []
+}
+assert not is_minimally_connected(v)
+
+# a   b - d
+# |     \
+# c       e
+w = {
+    'a': ['c'],
+    'b': ['e', 'd'],
+    'c': ['a'],
+    'd': ['b'],
+    'e': ['b']
+}
+assert not is_minimally_connected(w)

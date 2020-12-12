@@ -51,24 +51,26 @@ import sys
 
 
 def min_diff_array_partition(liz: List[int]):
-    # this should be O(n * sum) for time and space
+    # this should be O(n * sum) for time and O(sum) for space
     assert liz
     n = len(liz)
     s = sum(liz)
 
-    # note both row and col have the 0th index added; row for element value, col for sum of one subset
-    memo = [[False for x in range(s + 1)] for _ in range(n + 1)]
-    for i in range(n + 1):
-        memo[i][0] = True
+    # I started out with 2D memo table, but realized a row relies only on the previous row and nothing else,
+    # I can optimize the space to 1D array
+
+    # memo = [[False for x in range(s + 1)] for _ in range(n + 1)]
+    memo = [False for x in range(s + 1)]
+    memo[0] = True
 
     for i in range(1, n + 1):
         for j in range(1, s + 1):
             if liz[i - 1] <= j:
-                memo[i][j] = memo[i - 1][j - liz[i - 1]] or memo[i - 1][j]
+                memo[j] = memo[j - liz[i - 1]] or memo[j]
 
     min_diff = sys.maxsize
     for x in range(s + 1):
-        if memo[-1][x] and abs(s - x - x) < min_diff:
+        if memo[x] and abs(s - x - x) < min_diff:
             min_diff = s - 2 * x
 
     return min_diff

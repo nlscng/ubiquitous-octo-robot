@@ -20,18 +20,21 @@
 ##GOOGLE
 
 
-# Very interesting problem, worthy of the google sticker
+# Very interesting problem, worthy of the google sticker, although in the end it's so simple
 
 def make_functions():
     flist = []
 
     for i in [1, 2, 3]:
-        def print_i():
-            print()
-        flist.append(print_i)
+        def print_i(statement):
+            # Remember none of the func body is executed in declaration
+            print(statement)
+
+        flist.append((print_i, i))
 
     return flist
 
+
 functions = make_functions()
-for f in functions:
-    f()
+for f, a in functions:
+    f(a)

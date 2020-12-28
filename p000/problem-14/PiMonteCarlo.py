@@ -4,6 +4,8 @@
 #
 # Hint: The basic equation of a circle is x2 + y2 = r2.
 
+##Google
+
 import random as rand
 from math import pi
 

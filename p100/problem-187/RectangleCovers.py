@@ -19,7 +19,7 @@
 # }
 # return true as the first and third rectangle overlap each other.
 
-##GOOGLE
+##Google
 from typing import List
 
 

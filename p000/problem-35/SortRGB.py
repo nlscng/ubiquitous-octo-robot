@@ -10,6 +10,9 @@
 # For example, given the array ['G', 'B', 'R', 'R', 'B', 'R', 'G'], it should become ['R', 'R', 'R', 'G', 'G', 'B',
 # 'B'].
 
+##GOOGLE
+##TBC
+
 def sort_rgb(liz: list):
     if not isinstance(liz, list):
         raise Exception('Expected an list or array, got {} instead.'.format(type(liz)))

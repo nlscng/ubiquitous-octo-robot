@@ -41,6 +41,8 @@ def find_max_in_subarray(liz: list, k: int):
 # assert find_max_in_subarray([10, 5, 2, 7, 8, 7], 3) == [10, 7, 8, 8], "actual value is: {}".format(find_max_in_subarray([10, 5, 2, 7, 8, 7], 3))
 
 
+##Google
+
 def find_max_in_subarray_ver2(liz: list, k: int):
     # see this https://stackoverflow.com/questions/8031939/finding-maximum-for-every-window-of-size-k-in-an-array
 

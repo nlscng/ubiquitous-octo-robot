@@ -9,6 +9,8 @@
 #
 # Do this in constant space and in one pass.
 
+##Google
+
 class SinglyLinkedListNode:
     def __init__(self, val, next_node=None):
         self.val = val

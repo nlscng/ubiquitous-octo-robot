@@ -12,6 +12,8 @@
 # single-threaded program, so there is no need for actual locks or mutexes. Each method should run in O(h),
 # where h is the height of the tree.
 
+##Google
+
 class LockingBSTNode:
     def __init__(self, value, parent=None, is_locked=False):
         self.value = value

@@ -9,8 +9,9 @@
 #
 # For example, given S = [12, 1, 61, 5, 9, 2] and k = 24, return [12, 9, 2, 1] since it sums up to 24.
 
-## DynamicPrograming
-## DP
+##Google
+##DynamicPrograming
+##DP
 
 
 def subset_sum(arr: list, k: int):
@@ -56,8 +57,8 @@ def subset_sum(arr: list, k: int):
     return sol[::-1]
 
 
-# assert subset_sum([], 4) == []
-# assert subset_sum([3], 3) == [3]
-# assert subset_sum([1, 1, 1], 3) == [1, 1, 1]
-# assert subset_sum([1,2,5,3,4], 9) == []
+assert subset_sum([], 4) == []
+assert subset_sum([3], 3) == [3]
+assert subset_sum([1, 1, 1], 3) == [1, 1, 1]
+assert subset_sum([1,2,5,3,4], 9) == [5,4]
 assert set(subset_sum([12, 1, 61, 5, 9, 2], 24)) == {12, 9, 2, 1}

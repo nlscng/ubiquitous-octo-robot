@@ -19,9 +19,9 @@ otherwise False.
 Then we return the last element of P
 """
 
-##GOOGLE
+##Google
 ##DP
-##DYNAMICPROGRAMMING
+##DynamicProgramming
 
 from typing import List
 

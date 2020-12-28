@@ -38,6 +38,9 @@
 #
 # The name of a directory or sub-directory will not contain a period.
 
+##Review
+##Google
+
 class LongestABSPathNode:
     def __init__(self, file_name, is_file=False, children=[]):
         assert len(file_name) > 0

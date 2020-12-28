@@ -6,6 +6,10 @@
 #
 # Given N, write a function to return the number of knight's tours on an N by N chessboard.
 
+##Google
+##Backtracking
+##Review
+
 EMPTY = 0
 VISITED = 1
 

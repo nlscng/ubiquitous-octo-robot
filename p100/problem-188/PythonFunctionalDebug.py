@@ -17,7 +17,7 @@
 #     f()
 # How can we make it print out what we apparently want?
 
-##GOOGLE
+##Google
 
 
 # Very interesting problem, worthy of the google sticker, although in the end it's so simple

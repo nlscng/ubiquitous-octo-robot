@@ -10,6 +10,8 @@
 # For example, a sorted list has zero inversions. The array [2, 4, 1, 3, 5] has three inversions: (2, 1), (4, 1),
 # and (4, 3). The array [5, 4, 3, 2, 1] has ten inversions: every distinct pair forms an inversion.
 
+##Google
+##Review
 
 def merge(a_tup: tuple, b_tup: tuple):
     # REF: https://github.com/vineetjohn/daily-coding-problem/blob/master/solutions/problem_044.py

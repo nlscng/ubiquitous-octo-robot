@@ -51,7 +51,7 @@ def trade_with_fees_greedy(prices: List[int], fee: int) -> int:
 assert trade_with_fees_greedy([1, 3, 2, 8, 4, 10], 2) == 9
 
 # this next case fails on greedy version
-assert trade_with_fees_greedy([1, 3, 2, 1, 4, 10], 2) == 7
+# assert trade_with_fees_greedy([1, 3, 2, 1, 4, 10], 2) == 7
 
 """
 So given a i-th day, and j-th price, max profit would be 
@@ -70,7 +70,16 @@ def trade_with_fees(prices: List[int], fee: int) -> int:
 
     n = len(prices)
     # A 2D memo table, where x-axis is the given price history per day, and y-axis is day 1, day 2, etc
-    # So a p(i, j), max profit of i-th day
     memo = [[0 for _ in range(n)] for _ in range(n)]
 
-    return 0
+    for i in range(1, n):
+        possible_profit = 0
+        for j in range(i, n):
+            possible_profit = max([memo[i - 1][m] + prices[j] - prices[m] - fee for m in range(0, j)])
+            memo[i][j] = max(memo[i][j - 1], possible_profit)
+
+    return memo[-1][-1]
+
+
+assert trade_with_fees([1, 3, 2, 8, 4, 10], 2) == 9, "Actual: {}".format(trade_with_fees([1, 3, 2, 8, 4, 10], 2))
+assert trade_with_fees([1, 3, 2, 1, 4, 10], 2) == 7, "Actual: {}".format(trade_with_fees([1, 3, 2, 1, 4, 10], 2))

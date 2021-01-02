@@ -5,7 +5,7 @@
 # determine how many pairs of the line segments intersect.
 
 ##Facebook
-##TBC
+
 """
 This is interesting. Without noticing some key elements, comparing two list is O(n^2).
 Then checking if two pairs of points form an intersection can be done, maybe, in two separate dimension?
@@ -21,7 +21,7 @@ Point = (int, int)
 
 
 def intersect_one_dimension(a: Segment, b: Segment) -> bool:
-    # GG: this logics of checking for overlapping or intersection is quite common I think.
+    # GG: this logics of checking for overlapping is quite common I think.
     low_a, low_b = min(a[0], a[1]), min(b[0], b[1])
     high_a, high_b = max(a[0], a[1]), max(b[0], b[1])
     return max(low_a, low_b) <= min(high_a, high_b)
@@ -43,16 +43,33 @@ def intersect_two_dimension(a: Point, b: Point) -> bool:
 assert intersect_two_dimension(((0, 0), (2, 2)), ((0, 2), (2, 0)))
 assert not intersect_two_dimension(((0, 0), (2, 0)), ((0, 2), (2, 2)))
 
+"""
+1,   4,   8
 
-def num_intersection(lis_a: List[Point], lis_b: List[Point]) -> int:
-    assert lis_a and lis_b
+ 2, 3,  6
+
+"""
+
+
+def num_intersections(lis_a: List[int], lis_b: List[int]) -> int:
+    assert lis_a and lis_a and len(lis_a) == len(lis_b)
+    segments = []
+    for i in range(len(lis_a)):
+        segments.append((lis_a[i], lis_b[i]))
+
     count = 0
-    for a in lis_a:
-        for b in lis_b:
-            if intersect_two_dimension(a, b):
+    N = len(segments)
+    for i in range(N):
+        for j in range(i + 1, N):
+            a = segments[i]
+            b = segments[j]
+            if a[0] != b[0] and a[1] != b[1] and intersect_one_dimension(a, b) \
+                    and ((a[0] > b[0] and a[1] < b[1]) or (a[0] < b[0] and a[1] > b[1])):
                 count += 1
 
     return count
 
 
-assert num_intersection()
+assert num_intersections([1, 4, 9], [2, 3, 6]) == 0
+assert num_intersections([1, 2, 3], [2, 3, 4]) == 0
+assert num_intersections([1, 4, 5], [4, 2, 3]) == 2

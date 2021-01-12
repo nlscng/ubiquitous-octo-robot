@@ -13,9 +13,6 @@
 #  [20, 25, 30, 35, 40, 45]]
 # And i1 = 1, j1 = 1, i2 = 3, j2 = 3, return 15 as there are 15 numbers in the matrix smaller than 6 or greater than 23.
 
-##Google
-##SortedMatrix
-
 """
 The naive brute force way to doing this is have two, nested, for loops and just scan every element. The big O for that
 is O(n*m), where n is num of row, m is num of col.
@@ -31,3 +28,45 @@ and I'd know how many elements are smaller/bigger than target on this row, etc.
 
 This should be O(n + m)
 """
+
+##Google
+##SortedMatrix
+
+from typing import List
+
+
+def count_smaller_sorted_matrix(matrix: List[List[int]], k: int) -> int:
+    assert matrix and matrix[0]
+
+    n = len(matrix)
+    m = len(matrix[0])
+
+    r, c = n - 1, 0
+    count = 0
+
+    while r >= 0 and c < m:
+        walker = matrix[r][c]
+        if walker < k:
+            c += 1
+        else:  # walker >= k
+            r -= 1
+            count += c
+
+    if r >= 0:
+        count += (r + 1) * m
+
+    return count
+
+
+t1 = [[1, 4, 8],
+      [2, 10, 13],
+      [5, 18, 19]]
+assert count_smaller_sorted_matrix(t1, 7) == 4
+assert count_smaller_sorted_matrix(t1, 15) == 7
+assert count_smaller_sorted_matrix(t1, 1) == 0
+assert count_smaller_sorted_matrix(t1, 20) == 9
+
+
+def count_greater_sorted_matrix(matrix: List[List[int]], k: int) -> int:
+    #TBC
+    pass

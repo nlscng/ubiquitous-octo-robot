@@ -160,3 +160,4 @@ def naive_count(matrix: List[List[int]], loc1: (int, int), loc2: (int, int)) -> 
 
 
 assert naive_count(t2, (1, 1), (3, 3)) == 14
+assert naive_count(t2, (1, 1), (3, 3)) == count_element_outside_range_sorted_matrix(t2, (1, 1), (3, 3))

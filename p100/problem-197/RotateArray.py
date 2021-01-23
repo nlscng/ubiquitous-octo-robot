@@ -38,7 +38,7 @@ assert array_rotate_right_linear_space([1, 2, 3, 4, 5], 2) == [3, 4, 5, 1, 2]
 assert array_rotate_right_linear_space([1, 2, 3, 4, 5], 3) == [4, 5, 1, 2, 3]
 assert array_rotate_right_linear_space([1, 2, 3, 4, 5], 4) == [5, 1, 2, 3, 4]
 
-#GG: So there are many other ways to do this with linear space. I could
+# GG: So there are many other ways to do this with linear space. I could
 #   use a dictionary and keeps a mapping of value and their respective new index,
 #   or like I was using a queue.
 #   One way to do this with constant space, but O(n*k) time, is to rotate
@@ -49,6 +49,7 @@ assert array_rotate_right_linear_space([1, 2, 3, 4, 5], 4) == [5, 1, 2, 3, 4]
 #   and we reverse in place, the old k+ units, the now first k+ unit, to cdeba
 #   then we reverse the old first k units, the now k+ units, to cdeab
 
+# REF: https://www.geeksforgeeks.org/array-rotation/
 
 # assert array_rotate_right([1, 2, 3, 4, 5], 1) == [2, 3, 4, 5, 1]
 # assert array_rotate_right([1, 2, 3, 4, 5], 2) == [3, 4, 5, 1, 2]

@@ -12,31 +12,34 @@
 ##Review
 ##DP
 ##GOOGLE
+import copy
+
 
 def tree_max_sum_path(ar2d: []) -> int:
     # GG: this is a great question! Got me to think about DFS, back tracking, recursion, and then finally dp
-
+    clone = copy.deepcopy(ar2d)
     if not ar2d or not ar2d[0]:
         return []
 
-    for r in range(1, len(ar2d)):
-        for c in range(1, len(ar2d[r])):
-            cur_cell = ar2d[r][c]
-            last_level = ar2d[r-1][c-1] if r == c else max(ar2d[r-1][c-1], ar2d[r-1][c])
-            ar2d[r][c] = cur_cell + last_level
+    for r in range(1, len(clone)):
+        for c in range(len(clone[r])):
+            print('({}, {})'.format(r,c))
+            cur_cell = clone[r][c]
+            last_level = clone[r-1][c-1] if r == c else max(clone[r-1][c-1], clone[r-1][c])
+            clone[r][c] = cur_cell + last_level
 
-    end_r, end_c = len(ar2d[-1]) -1, ar2d[-1].index(max(ar2d[-1]))
+    end_r, end_c = len(clone[-1]) - 1, clone[-1].index(max(clone[-1]))
     my_path = [ar2d[end_r][end_c]]
     while end_r > 0:
         if end_r == end_c:
-            end_c = end_c - 1
-        elif ar2d[end_r - 1][end_c - 1] > ar2d[end_r-1][end_c]:
-            end_c = end_c - 1
+            end_c -= 1
+        elif clone[end_r - 1][end_c - 1] > clone[end_r-1][end_c]:
+            end_c -= 1
         else:
             end_c = end_c
-        my_path.append(ar2d[end_r -1][end_c])
+        my_path.append(ar2d[end_r - 1][end_c])
         end_r -= 1
-    my_path.append(ar2d[0][0])
+    # my_path.append(ar2d[0][0])
     my_path.reverse()
     return my_path
 
@@ -46,3 +49,9 @@ a = [[1],
      [1, 5, 1]]
 
 assert tree_max_sum_path(a) == [1,3,5], "Actual: {}".format(tree_max_sum_path(a))
+
+b = [[1],
+     [2, 3],
+     [1, 5, 1],
+     [1, 0, 1, 7]]
+assert tree_max_sum_path(b) == [1, 3, 1, 7]

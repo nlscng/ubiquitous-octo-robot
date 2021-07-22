@@ -5,12 +5,14 @@
 
 def is_numeric_palindrome(n: int) -> bool:
     assert n > 0
-
+    # this should be linear in time and constant in space.  
     m = 0
     v = n
     while v > 10:
-        r = v % 10
-        v /= 10
+        rem = v % 10
+        m = m * 10 + rem
+        v = v // 10
+    m = m * 10 + v
     return n == m
 
 

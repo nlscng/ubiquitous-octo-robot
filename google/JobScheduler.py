@@ -39,8 +39,9 @@ def schedule_job_with_start(start: int, dur: int, lis: list) -> bool:
         if fits([lis[m][1] + 1, lis[m + 1][0] - 1], [start, end]):
             return True
         # if fits(lis[m], [start, end]) or fits(lis[m + 1], [start, end]):
-        if start <= lis[m][1] <= end or start <= lis[m][1] <= end:
-            return False
+        # if start <= lis[m][1] <= end or start <= lis[m][1] <= end:
+        #     return False
+
 
         if lis[m + 1][1] < start:
             l = m + 1

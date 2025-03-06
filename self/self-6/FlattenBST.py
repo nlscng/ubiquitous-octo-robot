@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append(r'C:\Users\ncheng\Documents\GitHub\ubiquitous-octo-robot')
+sys.path
 from common.treenode.MyBST import IntNode
 
 

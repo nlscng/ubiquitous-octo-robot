@@ -10,6 +10,12 @@ resolution-markers = [
     "python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
+[manifest]
+members = [
+    "ubiquitous-octo-robot",
+    "utils",
+]
+
 [[package]]
 name = "appnope"
 version = "0.1.4"
@@ -1366,6 +1372,7 @@ dependencies = [
     { name = "pandas" },
     { name = "torch" },
     { name = "torchvision" },
+    { name = "utils" },
 ]
 
 [package.dev-dependencies]
@@ -1381,10 +1388,16 @@ requires-dist = [
     { name = "pandas", specifier = ">=3.0.0" },
     { name = "torch", specifier = ">=2.10.0" },
     { name = "torchvision", specifier = ">=0.25.0" },
+    { name = "utils", editable = "utils" },
 ]
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=9.0.2" }]
+
+[[package]]
+name = "utils"
+version = "0.1.0"
+source = { editable = "utils" }
 
 [[package]]
 name = "wcwidth"

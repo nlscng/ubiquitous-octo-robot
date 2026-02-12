@@ -11,9 +11,18 @@ dependencies = [
     "pandas>=3.0.0",
     "torch>=2.10.0",
     "torchvision>=0.25.0",
+    "utils",
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
 ]
+
+[tool.uv.workspace]
+members = [
+    "utils",
+]
+
+[tool.uv.sources]
+utils = { workspace = true, editable = true }
